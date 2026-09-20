@@ -136,6 +136,33 @@ ol.loop-list li:last-child::after{content:'↻';position:absolute;right:2px;top:
 .official-top{margin:4px auto 20px;max-width:290px}
 .official-top img{width:100%;border:1px solid var(--rule-2)}
 
+/* ---------- ① サービス登場：白背景のまま、ページ唯一の赤で目立たせる ----------
+   サービス名なので必ず1行に収める。帯は使わず、赤のマーカーと赤い下線だけで立たせる */
+/* 文字を大きく取りたいので、この一画面だけ左右パディングを打ち消して広く使う */
+.service-hero{text-align:center;margin:0 calc(var(--pad) * -1) 24px;padding:0 13px}
+.entry-content p.ribbon-head{margin:0 0 10px;text-align:center;font-size:15px;font-weight:800;color:var(--gold);line-height:1.5}
+.ribbon-head span{position:relative;display:inline-block;padding:0 20px}
+.ribbon-head span::before,.ribbon-head span::after{content:'';position:absolute;top:2px;width:2px;height:20px;background:var(--gold)}
+.ribbon-head span::before{left:4px;transform:rotate(-22deg)}
+.ribbon-head span::after{right:4px;transform:rotate(22deg)}
+.entry-content h2.service-head{position:relative;display:inline-block;text-align:center;color:var(--ink);
+  border-left:0;margin:0;padding:0 0 12px;font-size:clamp(23px,7.3vw,36px);line-height:1.35;letter-spacing:-.02em}
+/* 赤マーカー。本文の黄マーカーと同じ仕掛けで、熱量だけ上げている */
+.service-head>span{background:linear-gradient(transparent 56%,var(--hot-bg) 56%);padding:0 3px}
+/* 名前の下の赤い線。h2::after を一律 display:none にしているので、ここだけ戻す */
+.entry-content h2.service-head::after{content:'';display:block;position:absolute;left:50%;bottom:0;
+  width:100%;height:4px;background:var(--hot);transform:translateX(-50%)}
+.official-top.ohaka-visual{max-width:none}
+
+/* 視界に入ったら、ラベル→見出し→下線の順に出す。章頭とサービス名で共通。
+   隠すのは js-reveal が付いたときだけなので、JS不発でも内容は必ず見える */
+.js-reveal [data-reveal]>*{opacity:0;transform:translateY(14px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,.8,.3,1)}
+.js-reveal [data-reveal]>*+*{transition-delay:.1s}
+.js-reveal [data-reveal] h2::after{width:0;transition:width .5s cubic-bezier(.22,.8,.3,1) .34s}
+.js-reveal [data-reveal='in']>*{opacity:1;transform:none}
+.js-reveal [data-reveal='in'] h2::after{width:100%}
+
 /* ---------- ② サービス紹介：ここだけ熱量を上げる ----------
    長い説明を積まず、短い言い切りを数か所だけ大きくして流し読みでも刺さるようにする */
 .entry-content p.service-punch{font-size:21px;font-weight:800;line-height:1.6;color:var(--gold);margin:26px 0 12px}

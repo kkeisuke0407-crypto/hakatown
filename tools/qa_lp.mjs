@@ -41,6 +41,14 @@ for (const slug of ['', ...slugs]) {
       out.heroH = Math.round(hero.getBoundingClientRect().height);
       // 隠れたままのテキスト（アニメ未発火）
       out.hidden = [...document.querySelectorAll('[data-reveal] h2')].filter(h => getComputedStyle(h).opacity !== '1').length;
+      // 演出CSSが丸ごと消えても hidden は0になり素通りしてしまうので、CSSの存在自体を確かめる
+      out.revealAlive = document.documentElement.classList.contains('js-reveal')
+        && [...document.querySelectorAll('[data-reveal]')].length > 0
+        && getComputedStyle(document.querySelector('[data-reveal]>*')).transitionDuration !== '0s';
+      const sh = document.querySelector('.service-head');
+      out.serviceMark = getComputedStyle(sh.querySelector('span')).backgroundImage.includes('gradient');
+      out.serviceRule = getComputedStyle(sh, '::after').backgroundColor;
+      out.ribbon = getComputedStyle(document.querySelector('.ribbon-head span'), '::before').backgroundColor;
       // 画像の読み込み失敗
       out.brokenImg = [...document.images].filter(i => !i.complete || i.naturalWidth === 0).map(i => i.getAttribute('src'));
       out.imgCount = document.images.length;
@@ -56,6 +64,10 @@ for (const slug of ['', ...slugs]) {
     if (r.fvGap < 8) add(name, w, `FVでH1とカードが接近/重なり gap=${r.fvGap}px`);
     if (r.cardBottomOut > 2) add(name, w, `FVカードがヒーロー下からはみ出し ${r.cardBottomOut}px`);
     if (r.hidden > 0) add(name, w, `非表示のまま残る見出し ${r.hidden}件`);
+    if (!r.revealAlive) add(name, w, 'スクロールイン演出のCSSが効いていない');
+    if (!r.serviceMark) add(name, w, 'サービス名の赤マーカーが消えている');
+    if (r.serviceRule !== 'rgb(201, 55, 44)') add(name, w, `サービス名の赤下線が消えている (${r.serviceRule})`);
+    if (r.ribbon !== 'rgb(23, 107, 101)') add(name, w, `リボンの装飾が消えている (${r.ribbon})`);
     const realBroken = r.brokenImg.filter(u => !/02-prefecture\.png/.test(u)); // details内の遅延画像は未展開で正常
     if (realBroken.length) add(name, w, `画像切れ: ${realBroken.join(', ')}`);
     if (r.ctas.some(h => h !== 'https://townlife-ohaka.jp/')) add(name, w, `CTAリンク異常: ${r.ctas}`);
