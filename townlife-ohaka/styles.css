@@ -294,7 +294,6 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .about-list{margin:0 0 30px;padding:0;border-top:1px solid var(--rule)}
 .about-list dt{margin:0;padding:13px 0 0;font-size:13px;font-weight:800;color:var(--gold)}
 .about-list dd{margin:0;padding:2px 0 13px;font-size:16px;line-height:1.7;border-bottom:1px solid var(--rule)}
-.about-list dd.about-todo{color:var(--ink-sub);font-size:14px}
 
 /* ---------- フッター ---------- */
 .footer{font:12px/1.8 var(--gothic);padding:24px var(--pad);background:var(--bg);color:var(--ink-sub)}
@@ -334,6 +333,8 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 @media(max-width:359px){
   .ohaka-hero{height:470px}
   .ohaka-hero.ohaka-hero--tall{height:560px}
+  /* 通常幅では余白が空きすぎるが、320px級だけ詰まるページ用 */
+  .ohaka-hero.ohaka-hero--tall-xs{height:545px}
   .ohaka-hero__copy h1{font-size:26px}
   .ohaka-hero--h1-m .ohaka-hero__copy h1{font-size:23px}
   .entry-content p.sec-eyebrow{font-size:12px;letter-spacing:.06em}

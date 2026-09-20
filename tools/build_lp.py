@@ -49,6 +49,8 @@ def build_variable(lp):
     hero_cls = ' ohaka-hero--h1-m' if lp.get('h1_size') == 'm' else ''
     if lp.get('hero') == 'tall':
         hero_cls += ' ohaka-hero--tall'
+    elif lp.get('hero') == 'tall-xs':
+        hero_cls += ' ohaka-hero--tall-xs'
     ttl_len = len(re.sub(r'<[^>]+>', '', lp['ttl']))
     ttl_cls = '' if ttl_len <= 20 else (' fv-card__ttl--m' if ttl_len <= 30 else ' fv-card__ttl--s')
     spans = ''.join('<span>%s</span>' % s for s in lp['h1'])
