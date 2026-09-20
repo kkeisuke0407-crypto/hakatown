@@ -4,7 +4,7 @@ import path from 'node:path';
 const { chromium } = pkg;
 const ROOT = '/home/user/hakatown';
 const slugs = JSON.parse(process.argv[2]);
-const widths = [360, 375, 390, 820];
+const widths = [320, 360, 375, 390, 414, 820];
 const b = await chromium.launch();
 const problems = [];
 const add = (s, w, msg) => problems.push(`${s} @${w}px  ${msg}`);
@@ -59,7 +59,7 @@ for (const slug of ['', ...slugs]) {
     const realBroken = r.brokenImg.filter(u => !/02-prefecture\.png/.test(u)); // details内の遅延画像は未展開で正常
     if (realBroken.length) add(name, w, `画像切れ: ${realBroken.join(', ')}`);
     if (r.ctas.some(h => h !== 'https://townlife-ohaka.jp/')) add(name, w, `CTAリンク異常: ${r.ctas}`);
-    if (r.ctas.length !== 4) add(name, w, `CTA数が${r.ctas.length}（想定4）`);
+    if (r.ctas.length !== 5) add(name, w, `CTA数が${r.ctas.length}（想定5）`);
     const realMiss = missing.filter(u => !/googletagmanager|ERR_TUNNEL/.test(u)); // 検証環境は外部通信遮断
     if (realMiss.length) add(name, w, `リクエスト失敗/エラー: ${realMiss.slice(0,3).join(' | ')}`);
     if (w === 390) console.log(`${name.padEnd(22)} 画像${r.imgCount} CTA${r.ctas.length} FV余白${String(r.fvGap).padStart(4)}px 高さ${r.heroH} | ${r.h1}`);
