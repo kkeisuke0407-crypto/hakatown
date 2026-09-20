@@ -16,10 +16,10 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 .entry-content{padding:0 var(--pad)}
 
 /* ---------- セクション ---------- */
-/* 章の切れ目は「上の罫線 ＋ たっぷりの余白」で作る。流し見でもここで一度目が止まる */
-.entry-content .sec{display:flow-root;padding:42px 0 34px;border-top:1px solid var(--rule)}
-.entry-content .sec--sub{padding:34px 0 28px}
-.entry-content .sec--peak{padding:50px 0 40px}
+/* 章の切れ目は大見出しの色帯が担当する。セクション側は余白だけ持たせる */
+.entry-content .sec{display:flow-root;padding:36px 0 34px}
+.entry-content .sec--sub{padding:30px 0 28px}
+.entry-content .sec--peak{padding:42px 0 40px}
 
 /* ---------- 本文：ここが主役 ---------- */
 .entry-content p{font-family:var(--gothic);font-size:17px;line-height:1.9;text-align:left;max-width:none;margin:0 0 18px}
@@ -29,18 +29,21 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 .uline{text-decoration:none;background:linear-gradient(transparent 92%,var(--gold-line) 92%)}
 
 /* ---------- 見出し：2段階＋補足 ---------- */
-/* 章頭：ラベルと大見出しを1本の緑バーでひとかたまりにする。
-   バーが2〜3行ぶんの高さになるので、スクロール中でも「章が変わった」と一目で分かる */
-.sec-head{border-left:6px solid var(--gold);padding:1px 0 2px 14px;margin:0 0 22px}
-.sec--peak .sec-head{border-left-width:8px}
-.sec--sub .sec-head{border-left-width:5px;border-left-color:var(--gold-line)}
-.entry-content p.sec-eyebrow{margin:0 0 7px;font-size:12.5px;font-weight:800;line-height:1.5;letter-spacing:.09em;color:var(--gold);text-align:left}
-.sec--sub .sec-eyebrow{color:var(--ink-sub)}
-.entry-content .sec-head h2{border-left:0;padding:0;margin:0}
+/* 章頭：ラベル＋大見出しを色帯にして、画面の左端から右端まで走らせる。
+   流し見でも帯が視界に入った時点で「章が変わった」と分かる。
+   濃緑＝通常の章／さらに濃い緑＝山場／淡緑＝補足の章、の3段階 */
+.sec-head{background:var(--gold);color:var(--paper);padding:13px 16px 15px;
+  margin:0 calc(var(--pad) * -1) 24px;border-left:0}
+.sec--peak .sec-head{background:var(--cta-bottom);padding:15px 16px 17px;margin-bottom:26px}
+.sec--sub .sec-head{background:var(--gold-bg);color:var(--gold);border-left:6px solid var(--gold);padding:11px 16px 13px}
+.entry-content p.sec-eyebrow{margin:0 0 5px;font-size:12.5px;font-weight:800;line-height:1.5;letter-spacing:.09em;color:rgba(255,255,255,.82);text-align:left}
+.entry-content .sec--sub p.sec-eyebrow{color:var(--sumi-2)}
+.entry-content .sec-head h2{border-left:0;padding:0;margin:0;color:inherit}
+.sec-head--center{text-align:center}
 /* 大見出し：本文まわりの太字（19〜23px）より明確に上に立たせる */
-.entry-content h2{font-family:var(--gothic);font-size:27px;font-weight:800;line-height:1.5;letter-spacing:-.01em;text-wrap:balance;text-align:left;color:var(--ink);background:none;border:0;border-left:5px solid var(--gold);border-radius:0;margin:0 0 18px;padding:1px 0 1px 13px}
-.entry-content .sec--peak h2{font-size:30px;border-left-width:6px;margin-bottom:20px}
-.entry-content .sec--sub h2{font-size:22px;border-left-width:4px;color:var(--sumi-2)}
+.entry-content h2{font-family:var(--gothic);font-size:clamp(25px,7.2vw,30px);font-weight:800;line-height:1.45;letter-spacing:-.01em;text-wrap:balance;text-align:left;color:var(--ink);background:none;border:0;border-left:5px solid var(--gold);border-radius:0;margin:0 0 18px;padding:1px 0 1px 13px}
+.entry-content .sec--peak h2{font-size:clamp(24px,7.8vw,33px);border-left-width:6px;margin-bottom:20px}
+.entry-content .sec--sub h2{font-size:clamp(21px,5.6vw,24px);border-left-width:4px;color:var(--gold)}
 .entry-content h2::after{display:none}
 /* 中見出し：大見出しとは別の記号（緑の小さな四角）にして、格の違いを形で示す */
 .entry-content h3.sub-head{position:relative;font-family:var(--gothic);font-size:19px;font-weight:800;line-height:1.6;text-wrap:balance;text-align:left;color:var(--ink);background:none;border:0;margin:40px 0 14px;padding:0 0 0 20px}
@@ -132,7 +135,7 @@ ol.loop-list li:last-child::after{content:'↻';position:absolute;right:2px;top:
 .ribbon-head span::before,.ribbon-head span::after{content:'';position:absolute;top:2px;width:2px;height:20px;background:var(--gold)}
 .ribbon-head span::before{left:4px;transform:rotate(-22deg)}
 .ribbon-head span::after{right:4px;transform:rotate(22deg)}
-.entry-content h2.service-head{text-align:center;border-left:0;padding:0;margin:0 0 16px;font-size:27px}
+.entry-content h2.service-head{text-align:center;border-left:0;padding:0;margin:0;font-size:clamp(22px,7vw,30px)}
 .service-head small{display:none}
 .official-top.ohaka-visual{max-width:none}
 
@@ -252,12 +255,8 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .entry-content p.bridge{margin:30px 0 0;text-align:center;font-size:16px;font-weight:700;line-height:1.8;color:var(--ink-sub)}
 .entry-content p.bridge::after{content:'\2193';display:block;margin-top:2px;font-size:20px;font-weight:400;line-height:1.4;color:var(--gold-line)}
 
-/* 見出しの改行はスマホだけ。PCでは1行に収める */
-@media(min-width:601px){.br-sp{display:none}}
-
 /* ---------- 山場の境界 ---------- */
-.entry-content .story-turn,.entry-content .story-close{border-top:3px solid var(--gold-line)}
-.entry-content .story-turn h2{color:var(--gold)}
+.entry-content .story-turn h2,.entry-content .story-close h2{color:var(--paper)}
 
 /* ---------- フッター ---------- */
 .footer{font:12px/1.8 var(--gothic);padding:24px var(--pad);background:var(--bg);color:var(--ink-sub)}
@@ -270,9 +269,6 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 /* ---------- レスポンシブ ---------- */
 @media(min-width:601px){
   .entry-content p{font-size:18px}
-  .entry-content h2{font-size:30px}
-  .entry-content .sec--peak h2{font-size:33px}
-  .entry-content .sec--sub h2{font-size:24px}
   .entry-content h3.sub-head{font-size:21px}
   .ba{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);align-items:stretch}
   .entry-content .ba-arrow{display:flex;align-items:center;justify-content:center;transform:rotate(-90deg);margin:0}
@@ -289,9 +285,6 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
   .ohaka-hero__copy{padding:25px 20px;background:linear-gradient(90deg,#fffffff0,transparent 96%)}
   .ohaka-hero__copy>p{font-size:12px;margin-bottom:16px}
   .ohaka-hero__copy h1{font-size:29px;line-height:1.7}
-  .entry-content h2{font-size:25px}
-  /* 山場の見出しは長めなので、狭い端末では自動で縮めて3行に割れないようにする */
-  .entry-content .sec--peak h2{font-size:clamp(25px,7.2vw,28px)}
   .simple-cta .kin-phone{font-size:20px;gap:14px}
   .entry-content .ui-conclusion p.ui-conclusion__main{font-size:21px}
   .entry-content .story-key{font-size:18.5px}
@@ -300,8 +293,6 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 @media(max-width:359px){
   .ohaka-hero{height:470px}
   .ohaka-hero__copy h1{font-size:26px}
-  .entry-content h2{font-size:22px}
-  .entry-content .sec--peak h2{font-size:25px}
   .entry-content p.sec-eyebrow{font-size:12px;letter-spacing:.06em}
   .big-num b{font-size:44px}
   .simple-cta .kin-phone{font-size:18px;gap:10px;padding-inline:10px;min-height:66px}
