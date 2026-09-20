@@ -6,7 +6,7 @@
      記事中に自然に置くCTA、無駄にスクロールを増やさない */
 @import url('./3sha-base.css');
 
-:root{--paper:#fff;--bg:#f4f5f4;--ink:#222;--sumi:#222;--sumi-2:#3a3a3a;--ink-sub:#666;--gold:#176b65;--gold-line:#8fbcae;--gold-bg:#f2f8f5;--rule:#dce1df;--rule-2:#e9edeb;--win:#176b65;--marker:#fff3ad;--cta:#167063;--cta-bottom:#0c4e46;--con:#a8563f;--con-bg:#fbf6f4;--con-line:#e0c7bd;--accent:#b9822b;--hot:#c9372c;--hot-bg:#ffd8d2;--pad:clamp(20px,5vw,40px);--sans:var(--gothic)}
+:root{--paper:#fff;--bg:#f4f5f4;--ink:#222;--sumi:#222;--sumi-2:#3a3a3a;--ink-sub:#666;--gold:#176b65;--gold-line:#8fbcae;--gold-bg:#f2f8f5;--rule:#dce1df;--rule-2:#e9edeb;--win:#176b65;--marker:#fff3ad;--cta:#167063;--cta-bottom:#0c4e46;--con:#a8563f;--con-bg:#fbf6f4;--con-line:#e0c7bd;--accent:#b9822b;--hot:#c9372c;--hot-bg:#ffd8d2;--mk:#cbe6da;--note:#767676;--pad:clamp(20px,5vw,40px);--sans:var(--gothic)}
 
 html,body{margin:0;overflow-x:clip}
 body{font-family:var(--gothic);font-size:17px;line-height:1.9;letter-spacing:0;color:var(--ink)}
@@ -29,16 +29,22 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 .uline{text-decoration:none;background:linear-gradient(transparent 92%,var(--gold-line) 92%)}
 
 /* ---------- 見出し：2段階＋補足 ---------- */
-/* 章頭：ラベル＋大見出しを色帯にして、画面の左端から右端まで走らせる。
-   流し見でも帯が視界に入った時点で「章が変わった」と分かる。
-   濃緑＝通常の章／さらに濃い緑＝山場／淡緑＝補足の章、の3段階 */
-.sec-head{background:var(--gold);color:var(--paper);padding:13px 16px 15px;
-  margin:0 calc(var(--pad) * -1) 24px;border-left:0}
-.sec--peak .sec-head{background:var(--cta-bottom);padding:15px 16px 17px;margin-bottom:26px}
-.sec--sub .sec-head{background:var(--gold-bg);color:var(--gold);border-left:6px solid var(--gold);padding:11px 16px 13px}
-.entry-content p.sec-eyebrow{margin:0 0 5px;font-size:12.5px;font-weight:800;line-height:1.5;letter-spacing:.09em;color:rgba(255,255,255,.82);text-align:left}
-.entry-content .sec--sub p.sec-eyebrow{color:var(--sumi-2)}
-.entry-content .sec-head h2{border-left:0;padding:0;margin:0;color:inherit}
+/* 章頭：帯をやめ、サービス名と同じ「マーカー＋下線」に揃える。
+   下線は記事幅いっぱいに引くので、章の区切り線も兼ねる。
+   赤はサービス名だけに残し、章の見出しは緑で通す */
+.sec-head{margin:0 0 22px}
+.entry-content p.sec-eyebrow{margin:0 0 6px;font-size:12.5px;font-weight:800;line-height:1.5;letter-spacing:.09em;color:var(--gold);text-align:left}
+.entry-content .sec--sub p.sec-eyebrow{color:var(--ink-sub)}
+.entry-content .sec-head h2{position:relative;display:block;border-left:0;margin:0;padding:0 0 13px;color:var(--ink)}
+.entry-content .sec-head h2>span{background:linear-gradient(transparent 58%,var(--mk) 58%);padding:0 4px;margin-left:-4px}
+/* h2::after を一律 display:none にしているので、ここだけ戻す */
+.entry-content .sec-head h2::after{content:'';display:block;position:absolute;left:0;bottom:0;
+  width:100%;height:4px;background:var(--gold)}
+/* 山場は線を太く濃く、補足の章は細くしてマーカーも外す */
+.entry-content .sec--peak .sec-head h2::after{height:5px;background:var(--cta-bottom)}
+.entry-content .sec--sub .sec-head h2{padding-bottom:10px}
+.entry-content .sec--sub .sec-head h2>span{background:none;padding:0;margin:0}
+.entry-content .sec--sub .sec-head h2::after{height:2px;background:var(--gold-line)}
 /* 大見出し：本文まわりの太字（19〜23px）より明確に上に立たせる */
 .entry-content h2{font-family:var(--gothic);font-size:clamp(25px,7.2vw,30px);font-weight:800;line-height:1.45;letter-spacing:-.01em;text-wrap:balance;text-align:left;color:var(--ink);background:none;border:0;border-left:5px solid var(--gold);border-radius:0;margin:0 0 18px;padding:1px 0 1px 13px}
 .entry-content .sec--peak h2{font-size:clamp(24px,7.8vw,33px);border-left-width:6px;margin-bottom:20px}
@@ -107,9 +113,12 @@ ol.loop-list li{counter-increment:l;position:relative;padding:5px 0 5px 30px;fon
 ol.loop-list li::before{content:counter(l);position:absolute;left:0;top:8px;width:18px;height:18px;line-height:18px;text-align:center;font-size:10px;font-weight:800;color:var(--ink-sub);background:var(--paper);border:1px solid var(--rule);border-radius:50%}
 ol.loop-list li:last-child::after{content:'↻';position:absolute;right:2px;top:4px;font-size:16px;color:var(--gold-line)}
 
-/* ---------- 注記 ---------- */
-.entry-content p.kin-note{font-size:12px;line-height:1.8;text-align:left;color:var(--ink-sub);margin:0 0 20px;max-width:none;overflow-wrap:anywhere}
-.kin-note a{color:var(--ink-sub);text-underline-offset:3px}
+/* ---------- 注記：本文の流れを止めないよう、小さく淡く。
+   ただし読めなくなると意味がないので、コントラスト比4.5:1は確保している ---------- */
+.entry-content p.kin-note{font-size:11.5px;line-height:1.7;text-align:left;color:var(--note);margin:0 0 16px;max-width:none;overflow-wrap:anywhere}
+.entry-content p.kin-note strong{font-weight:700;color:var(--note)}
+.kin-note a{color:var(--note);text-underline-offset:3px}
+.kin-photo figcaption,.official-top figcaption{color:var(--note)}
 
 /* ---------- 画像 ---------- */
 /* 図版は横幅いっぱい。entry-content の左右パディングを打ち消して、
@@ -146,16 +155,14 @@ ol.loop-list li:last-child::after{content:'↻';position:absolute;right:2px;top:
   width:100%;height:4px;background:var(--hot);transform:translateX(-50%)}
 .official-top.ohaka-visual{max-width:none}
 
-/* 視界に入ったら、リボン→サービス名→赤い線の順に出す。
+/* 視界に入ったら、ラベル→見出し→下線の順に出す。章頭とサービス名で共通。
    隠すのは js-reveal が付いたときだけなので、JS不発でも内容は必ず見える */
-.js-reveal [data-reveal] .ribbon-head,
-.js-reveal [data-reveal] .service-head{opacity:0;transform:translateY(14px);
+.js-reveal [data-reveal]>*{opacity:0;transform:translateY(14px);
   transition:opacity .5s ease,transform .5s cubic-bezier(.22,.8,.3,1)}
-.js-reveal [data-reveal] .service-head{transition-delay:.12s}
-.js-reveal [data-reveal] .service-head::after{width:0;transition:width .55s cubic-bezier(.22,.8,.3,1) .42s}
-.js-reveal [data-reveal='in'] .ribbon-head,
-.js-reveal [data-reveal='in'] .service-head{opacity:1;transform:none}
-.js-reveal [data-reveal='in'] .service-head::after{width:100%}
+.js-reveal [data-reveal]>*+*{transition-delay:.1s}
+.js-reveal [data-reveal] h2::after{width:0;transition:width .5s cubic-bezier(.22,.8,.3,1) .34s}
+.js-reveal [data-reveal='in']>*{opacity:1;transform:none}
+.js-reveal [data-reveal='in'] h2::after{width:100%}
 
 /* ---------- ② メリット：カードを積まず、記事的なリストで ---------- */
 ol.merit-list{list-style:none;counter-reset:m;padding:0;margin:0 0 6px;display:grid;gap:0}
