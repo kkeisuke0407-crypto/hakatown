@@ -53,9 +53,13 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 /* FV下部のティザー。画像に文字は焼き込まず、HTMLテキストの白カードを写真に重ねる */
 .ohaka-hero__teaser{display:none}
 .fv-card{position:absolute;z-index:2;left:12px;right:12px;bottom:-1px;padding:18px 18px 16px;
-  background:rgba(255,255,255,.96);border-radius:14px 14px 0 0;box-shadow:0 -6px 22px rgba(20,50,45,.16);text-align:left}
-.fv-card__ttl{margin:0 0 7px;font-size:19px;font-weight:800;line-height:1.5;color:var(--gold)}
-.fv-card__txt{margin:0 0 13px;font-size:14px;font-weight:500;line-height:1.7;color:var(--sumi-2)}
+  background:rgba(255,255,255,.96);border-radius:14px 14px 0 0;box-shadow:0 -6px 22px rgba(20,50,45,.16);text-align:center}
+.fv-card__ttl{margin:0 0 8px;font-size:19px;font-weight:800;line-height:1.5;color:var(--gold);text-align:center;text-wrap:balance}
+.fv-card__txt{margin:0 0 13px;font-size:14px;font-weight:500;line-height:1.85;color:var(--sumi-2);text-align:center;text-wrap:balance}
+/* FVの肝：ここだけは「下線＋マーカー」で確実に目を止める */
+.fv-card__mark{font-weight:800;color:var(--gold);
+  background:linear-gradient(transparent 60%,var(--marker) 60%);
+  border-bottom:2px solid var(--gold);padding-bottom:1px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .fv-card__btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 14px;
   background:var(--cta);border-radius:999px;color:#fff;font-size:14.5px;font-weight:700;line-height:1.4;text-decoration:none}
 .fv-card__btn span{font-size:15px}
