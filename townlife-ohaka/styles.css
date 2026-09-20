@@ -87,6 +87,12 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 .ohaka-hero__copy>p{font:700 14px/1.6 var(--gothic);color:var(--gold);margin:0 0 20px}
 .ohaka-hero__copy h1{font:800 39px/1.6 var(--gothic);margin:0;color:var(--ink)}
 .ohaka-hero__copy h1 span{display:block}
+/* 横展開LP：H1やティザーが長いKWでは、FVの高さを保つために一段小さくする */
+.ohaka-hero--h1-m .ohaka-hero__copy h1{font-size:34px}
+.fv-card__ttl--m{font-size:17px}
+.fv-card__ttl--s{font-size:15.5px;line-height:1.55}
+/* ティザーが長いKWは、H1とカードが重ならないようFVを少しだけ高くする */
+.ohaka-hero.ohaka-hero--tall{height:560px}
 .ohaka-intro{padding-top:20px;padding-bottom:4px}
 .ohaka-intro .kin-banner-label{font-size:11px;font-weight:400;color:var(--ink-sub);margin:0 0 14px;text-align:left}
 .ohaka-tags{display:flex;flex-wrap:wrap;gap:6px;padding:0;list-style:none;margin:0 0 18px}
@@ -305,10 +311,12 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 }
 @media(max-width:600px){
   .ohaka-hero{height:470px}
+  .ohaka-hero.ohaka-hero--tall{height:545px}
   .ohaka-hero>img{object-position:60% center}
   .ohaka-hero__copy{padding:25px 20px;background:linear-gradient(90deg,#fffffff0,transparent 96%)}
   .ohaka-hero__copy>p{font-size:12px;margin-bottom:16px}
   .ohaka-hero__copy h1{font-size:29px;line-height:1.7}
+  .ohaka-hero--h1-m .ohaka-hero__copy h1{font-size:25px;line-height:1.62}
   .simple-cta .kin-phone{font-size:20px;gap:14px}
   .entry-content .ui-conclusion p.ui-conclusion__main{font-size:21px}
   .entry-content .story-key{font-size:18.5px}
@@ -316,7 +324,9 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 }
 @media(max-width:359px){
   .ohaka-hero{height:470px}
+  .ohaka-hero.ohaka-hero--tall{height:560px}
   .ohaka-hero__copy h1{font-size:26px}
+  .ohaka-hero--h1-m .ohaka-hero__copy h1{font-size:23px}
   .entry-content p.sec-eyebrow{font-size:12px;letter-spacing:.06em}
   .big-num b{font-size:44px}
   .simple-cta .kin-phone{font-size:18px;gap:10px;padding-inline:10px;min-height:66px}
