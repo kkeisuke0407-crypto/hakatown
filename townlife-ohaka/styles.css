@@ -285,7 +285,9 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 @media(max-width:600px){
   .ohaka-hero{height:470px}
   .ohaka-hero.ohaka-hero--tall{height:545px}
-  .ohaka-hero>img{object-position:60% center}
+  /* スマホは縦長に切り抜かれ元絵の半分強しか映らない。60%だと右にいる夫が
+     フレームから切れるため、夫婦2人が収まる85%に寄せる（PCは切り抜き不要なので据え置き） */
+  .ohaka-hero>img{object-position:85% center}
   .ohaka-hero__copy{padding:25px 20px;background:linear-gradient(90deg,#fffffff0,transparent 96%)}
   .ohaka-hero__copy>p{font-size:12px;margin-bottom:16px}
   .ohaka-hero__copy h1{font-size:29px;line-height:1.7}
