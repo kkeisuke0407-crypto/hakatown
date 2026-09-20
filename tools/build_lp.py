@@ -83,6 +83,7 @@ def build_variable(lp):
   </figure>
   <div class="entry-content ohaka-intro">
     <p class="kin-banner-label kin-banner-label--campaign">PR</p>
+    <p class="fv-note">※本記事中の画像はイメージです。<br>※本記事の金額・内容は一例です。</p>
 {intro}
   </div>
 </section>

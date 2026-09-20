@@ -94,7 +94,9 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 /* ティザーが長いKWは、H1とカードが重ならないようFVを少しだけ高くする */
 .ohaka-hero.ohaka-hero--tall{height:560px}
 .ohaka-intro{padding-top:20px;padding-bottom:4px}
-.ohaka-intro .kin-banner-label{font-size:11px;font-weight:400;color:var(--ink-sub);margin:0 0 14px;text-align:left}
+.ohaka-intro .kin-banner-label{font-size:11px;font-weight:400;color:var(--ink-sub);margin:0 0 6px;text-align:left}
+/* FV直下の注記。PRラベルと同じ濃さにして、薄くなりすぎないようにする */
+.entry-content p.fv-note{font-size:11.5px;line-height:1.75;color:var(--ink-sub);margin:0 0 14px;text-align:left}
 .ohaka-tags{display:flex;flex-wrap:wrap;gap:6px;padding:0;list-style:none;margin:0 0 18px}
 .ohaka-tags li{padding:5px 10px;background:var(--gold-bg);border:1px solid var(--gold-line);font-size:12px;font-weight:700;line-height:1.6;color:var(--gold)}
 
@@ -288,10 +290,16 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 
 /* ---------- 山場の境界 ---------- */
 
+/* ---------- 運営者情報ページ ---------- */
+.about-list{margin:0 0 30px;padding:0;border-top:1px solid var(--rule)}
+.about-list dt{margin:0;padding:13px 0 0;font-size:13px;font-weight:800;color:var(--gold)}
+.about-list dd{margin:0;padding:2px 0 13px;font-size:16px;line-height:1.7;border-bottom:1px solid var(--rule)}
+.about-list dd.about-todo{color:var(--ink-sub);font-size:14px}
+
 /* ---------- フッター ---------- */
 .footer{font:12px/1.8 var(--gothic);padding:24px var(--pad);background:var(--bg);color:var(--ink-sub)}
 .footer p{margin:0 0 12px}
-.footer>div{display:flex;justify-content:space-between;gap:12px}
+.footer>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 16px}
 .footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--gold)}
 .skip{position:fixed;left:12px;top:12px;clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
 .skip:focus{z-index:10;clip-path:none;width:auto;height:auto;padding:12px;background:var(--paper)}
