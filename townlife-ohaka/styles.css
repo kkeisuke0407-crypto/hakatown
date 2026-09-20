@@ -16,9 +16,10 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 .entry-content{padding:0 var(--pad)}
 
 /* ---------- セクション ---------- */
-.entry-content .sec{display:flow-root;padding:30px 0 30px}
-.entry-content .sec--sub{padding:22px 0 22px}
-.entry-content .sec--peak{padding:40px 0 40px}
+/* 章の切れ目は「上の罫線 ＋ たっぷりの余白」で作る。流し見でもここで一度目が止まる */
+.entry-content .sec{display:flow-root;padding:42px 0 34px;border-top:1px solid var(--rule)}
+.entry-content .sec--sub{padding:34px 0 28px}
+.entry-content .sec--peak{padding:50px 0 40px}
 
 /* ---------- 本文：ここが主役 ---------- */
 .entry-content p{font-family:var(--gothic);font-size:17px;line-height:1.9;text-align:left;max-width:none;margin:0 0 18px}
@@ -28,17 +29,28 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 .uline{text-decoration:none;background:linear-gradient(transparent 92%,var(--gold-line) 92%)}
 
 /* ---------- 見出し：2段階＋補足 ---------- */
-.entry-content h2{font-family:var(--gothic);font-size:24px;font-weight:800;line-height:1.55;text-align:left;color:var(--ink);background:none;border:0;border-left:5px solid var(--gold);border-radius:0;margin:0 0 18px;padding:1px 0 1px 13px}
-.entry-content .sec--peak h2{font-size:27px;border-left-width:6px;margin-bottom:20px}
-.entry-content .sec--sub h2{font-size:20px;border-left-width:4px;color:var(--sumi-2)}
+/* 章頭：ラベルと大見出しを1本の緑バーでひとかたまりにする。
+   バーが2〜3行ぶんの高さになるので、スクロール中でも「章が変わった」と一目で分かる */
+.sec-head{border-left:6px solid var(--gold);padding:1px 0 2px 14px;margin:0 0 22px}
+.sec--peak .sec-head{border-left-width:8px}
+.sec--sub .sec-head{border-left-width:5px;border-left-color:var(--gold-line)}
+.entry-content p.sec-eyebrow{margin:0 0 7px;font-size:12.5px;font-weight:800;line-height:1.5;letter-spacing:.09em;color:var(--gold);text-align:left}
+.sec--sub .sec-eyebrow{color:var(--ink-sub)}
+.entry-content .sec-head h2{border-left:0;padding:0;margin:0}
+/* 大見出し：本文まわりの太字（19〜23px）より明確に上に立たせる */
+.entry-content h2{font-family:var(--gothic);font-size:27px;font-weight:800;line-height:1.5;letter-spacing:-.01em;text-wrap:balance;text-align:left;color:var(--ink);background:none;border:0;border-left:5px solid var(--gold);border-radius:0;margin:0 0 18px;padding:1px 0 1px 13px}
+.entry-content .sec--peak h2{font-size:30px;border-left-width:6px;margin-bottom:20px}
+.entry-content .sec--sub h2{font-size:22px;border-left-width:4px;color:var(--sumi-2)}
 .entry-content h2::after{display:none}
-.entry-content h3.sub-head{font-family:var(--gothic);font-size:21px;font-weight:800;line-height:1.6;text-align:left;color:var(--ink);background:none;border:0;margin:34px 0 16px;padding:0 0 9px;border-bottom:2px solid var(--gold-line)}
+/* 中見出し：大見出しとは別の記号（緑の小さな四角）にして、格の違いを形で示す */
+.entry-content h3.sub-head{position:relative;font-family:var(--gothic);font-size:19px;font-weight:800;line-height:1.6;text-wrap:balance;text-align:left;color:var(--ink);background:none;border:0;margin:40px 0 14px;padding:0 0 0 20px}
+.entry-content h3.sub-head::before{content:'';position:absolute;left:0;top:.62em;width:11px;height:11px;background:var(--gold)}
 .entry-content h3{font-family:var(--gothic);font-size:19px;font-weight:800;line-height:1.6;background:none;color:var(--ink);border:0;padding:0;margin:8px 0 12px;text-align:left}
 .entry-content h4{font-family:var(--gothic);font-weight:800;margin:0}
 .service-head small{display:block;font-size:16px;font-weight:400;margin-bottom:2px;color:var(--ink-sub)}
 
 /* ---------- 「大声」は各セクション1回まで ---------- */
-.entry-content .story-key{font-size:21px;line-height:1.7;font-weight:800;margin:24px 0 18px;text-align:left}
+.entry-content .story-key{font-size:19px;line-height:1.75;font-weight:800;margin:24px 0 18px;text-align:left}
 .story-key strong{color:var(--gold)}
 
 /* ---------- FV ---------- */
@@ -236,8 +248,15 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .kin-faq details[open] summary>span::after{content:'−';font-size:20px}
 .entry-content .kin-faq p.kin-faq__a{font-size:15px;line-height:1.85;text-align:left;margin:0;padding:0 0 17px 26px}
 
+/* ---------- 章と章のつなぎ。本文と同じ見た目にせず、「渡し」だと分かる形にする ---------- */
+.entry-content p.bridge{margin:30px 0 0;text-align:center;font-size:16px;font-weight:700;line-height:1.8;color:var(--ink-sub)}
+.entry-content p.bridge::after{content:'\2193';display:block;margin-top:2px;font-size:20px;font-weight:400;line-height:1.4;color:var(--gold-line)}
+
+/* 見出しの改行はスマホだけ。PCでは1行に収める */
+@media(min-width:601px){.br-sp{display:none}}
+
 /* ---------- 山場の境界 ---------- */
-.story-turn,.story-close{border-top:3px solid var(--gold-line)}
+.entry-content .story-turn,.entry-content .story-close{border-top:3px solid var(--gold-line)}
 .entry-content .story-turn h2{color:var(--gold)}
 
 /* ---------- フッター ---------- */
@@ -251,8 +270,10 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 /* ---------- レスポンシブ ---------- */
 @media(min-width:601px){
   .entry-content p{font-size:18px}
-  .entry-content h2{font-size:27px}
-  .entry-content .sec--peak h2{font-size:30px}
+  .entry-content h2{font-size:30px}
+  .entry-content .sec--peak h2{font-size:33px}
+  .entry-content .sec--sub h2{font-size:24px}
+  .entry-content h3.sub-head{font-size:21px}
   .ba{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);align-items:stretch}
   .entry-content .ba-arrow{display:flex;align-items:center;justify-content:center;transform:rotate(-90deg);margin:0}
   .case-photo{height:190px}
@@ -268,18 +289,20 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
   .ohaka-hero__copy{padding:25px 20px;background:linear-gradient(90deg,#fffffff0,transparent 96%)}
   .ohaka-hero__copy>p{font-size:12px;margin-bottom:16px}
   .ohaka-hero__copy h1{font-size:29px;line-height:1.7}
-  .entry-content h2{font-size:22px}
-  .entry-content .sec--peak h2{font-size:24px}
+  .entry-content h2{font-size:25px}
+  /* 山場の見出しは長めなので、狭い端末では自動で縮めて3行に割れないようにする */
+  .entry-content .sec--peak h2{font-size:clamp(25px,7.2vw,28px)}
   .simple-cta .kin-phone{font-size:20px;gap:14px}
   .entry-content .ui-conclusion p.ui-conclusion__main{font-size:21px}
-  .entry-content .story-key{font-size:20px}
+  .entry-content .story-key{font-size:18.5px}
   .entry-content .turn-to{font-size:21px}
 }
 @media(max-width:359px){
   .ohaka-hero{height:470px}
   .ohaka-hero__copy h1{font-size:26px}
-  .entry-content h2{font-size:20px}
-  .entry-content .sec--peak h2{font-size:22px}
+  .entry-content h2{font-size:22px}
+  .entry-content .sec--peak h2{font-size:25px}
+  .entry-content p.sec-eyebrow{font-size:12px;letter-spacing:.06em}
   .big-num b{font-size:44px}
   .simple-cta .kin-phone{font-size:18px;gap:10px;padding-inline:10px;min-height:66px}
   .entry-content h4.case-ttl{font-size:17px}
