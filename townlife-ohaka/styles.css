@@ -129,15 +129,35 @@ ol.loop-list li:last-child::after{content:'↻';position:absolute;right:2px;top:
 .entry-content .turn-arrow{font-size:20px;line-height:1.4;color:var(--gold-line);margin:6px 0}
 .entry-content .turn-to{font-size:23px;font-weight:800;line-height:1.5;color:var(--gold)}
 
-/* ---------- ① サービス登場：リボン見出し ---------- */
-.entry-content p.ribbon-head{margin:0 0 6px;text-align:center;font-size:15px;font-weight:800;color:var(--gold);line-height:1.5}
+/* ---------- ① サービス登場：ここだけは見出しではなく「発表」として組む ----------
+   1行のまま字を大きくするのは幅で頭打ちになるので、公式のブランド表記どおり
+   「タウンライフ」＋「お墓マッチ」の2段に分け、下段を一気に大きくしている */
+.service-hero{padding:26px 16px 30px}
+.entry-content p.ribbon-head{margin:0 0 14px;text-align:center;font-size:15px;font-weight:800;color:var(--paper);line-height:1.5}
 .ribbon-head span{position:relative;display:inline-block;padding:0 20px}
-.ribbon-head span::before,.ribbon-head span::after{content:'';position:absolute;top:2px;width:2px;height:20px;background:var(--gold)}
+.ribbon-head span::before,.ribbon-head span::after{content:'';position:absolute;top:2px;width:2px;height:20px;background:var(--paper)}
 .ribbon-head span::before{left:4px;transform:rotate(-22deg)}
 .ribbon-head span::after{right:4px;transform:rotate(22deg)}
-.entry-content h2.service-head{text-align:center;border-left:0;padding:0;margin:0;font-size:clamp(22px,7vw,30px)}
-.service-head small{display:none}
+.entry-content h2.service-head{position:relative;display:inline-block;text-align:center;border-left:0;margin:0;padding:0 0 15px;
+  font-size:clamp(34px,11.6vw,52px);line-height:1.18;letter-spacing:-.02em}
+.service-head small{display:block;margin-bottom:7px;font-size:clamp(14px,3.9vw,18px);font-weight:800;
+  letter-spacing:.22em;text-indent:.22em;line-height:1.6;color:rgba(255,255,255,.78)}
+/* 名前の下のアクセントライン。JSがなければ最初から引いてある。
+   h2::after を一律で display:none にしているので、ここだけ戻す */
+.entry-content h2.service-head::after{content:'';display:block;position:absolute;left:50%;bottom:0;
+  width:84%;height:4px;background:var(--gold-line);transform:translateX(-50%)}
 .official-top.ohaka-visual{max-width:none}
+
+/* 視界に入ったら、リボン→サービス名→ラインの順に出す。
+   隠すのは js-reveal が付いたときだけなので、JS不発でも内容は必ず見える */
+.js-reveal [data-reveal] .ribbon-head,
+.js-reveal [data-reveal] .service-head{opacity:0;transform:translateY(16px);
+  transition:opacity .55s ease,transform .55s cubic-bezier(.22,.8,.3,1)}
+.js-reveal [data-reveal] .service-head{transition-delay:.14s}
+.js-reveal [data-reveal] .service-head::after{width:0;transition:width .6s cubic-bezier(.22,.8,.3,1) .5s}
+.js-reveal [data-reveal='in'] .ribbon-head,
+.js-reveal [data-reveal='in'] .service-head{opacity:1;transform:none}
+.js-reveal [data-reveal='in'] .service-head::after{width:84%}
 
 /* ---------- ② メリット：カードを積まず、記事的なリストで ---------- */
 ol.merit-list{list-style:none;counter-reset:m;padding:0;margin:0 0 6px;display:grid;gap:0}
