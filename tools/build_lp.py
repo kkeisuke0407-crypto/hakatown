@@ -73,6 +73,7 @@ def build_variable(lp):
   <figure class="kin-fv__visual ohaka-hero{hero_cls}">
     <img src="../townlife-ohaka/images/hero-family.png" alt="明るい自宅でタブレットを見ながら相談する夫婦のイメージ" width="1536" height="1024" fetchpriority="high">
     <div class="ohaka-hero__copy">
+    <p class="ohaka-hero__note"><span>※本記事中の画像はイメージです。<br>※本記事の金額・内容は一例です。</span></p>
       <p>家族で考える、これからのお墓</p>
       <h1 id="main-title">{spans}</h1>
     </div>
@@ -85,7 +86,6 @@ def build_variable(lp):
   </figure>
   <div class="entry-content ohaka-intro">
     <p class="kin-banner-label kin-banner-label--campaign">PR</p>
-    <p class="fv-note">※本記事中の画像はイメージです。<br>※本記事の金額・内容は一例です。</p>
 {intro}
   </div>
 </section>
