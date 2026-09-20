@@ -6,7 +6,7 @@
      記事中に自然に置くCTA、無駄にスクロールを増やさない */
 @import url('./3sha-base.css');
 
-:root{--paper:#fff;--bg:#f4f5f4;--ink:#222;--sumi:#222;--sumi-2:#3a3a3a;--ink-sub:#666;--gold:#176b65;--gold-line:#8fbcae;--gold-bg:#f2f8f5;--rule:#dce1df;--rule-2:#e9edeb;--win:#176b65;--marker:#fff3ad;--cta:#167063;--cta-bottom:#0c4e46;--con:#a8563f;--con-bg:#fbf6f4;--con-line:#e0c7bd;--accent:#b9822b;--hot:#c9372c;--hot-bg:#ffd8d2;--mk:#cbe6da;--note:#767676;--pad:clamp(20px,5vw,40px);--sans:var(--gothic)}
+:root{--paper:#fff;--bg:#f4f5f4;--ink:#222;--sumi:#222;--sumi-2:#3a3a3a;--ink-sub:#666;--gold:#176b65;--gold-line:#8fbcae;--gold-bg:#f2f8f5;--rule:#dce1df;--rule-2:#e9edeb;--win:#176b65;--marker:#fff3ad;--cta:#167063;--cta-bottom:#0c4e46;--con:#a8563f;--con-bg:#fbf6f4;--con-line:#e0c7bd;--accent:#b9822b;--hot:#c9372c;--hot-bg:#ffd8d2;--mk:#cbe6da;--note:#767676;--arrow:#3a7a69;--accent-txt:#946416;--pad:clamp(20px,5vw,40px);--sans:var(--gothic)}
 
 html,body{margin:0;overflow-x:clip}
 body{font-family:var(--gothic);font-size:17px;line-height:1.9;letter-spacing:0;color:var(--ink)}
@@ -134,7 +134,7 @@ ol.loop-list li:last-child::after{content:'↻';position:absolute;right:2px;top:
 .turn-block{margin:24px 0 18px;padding:20px 16px;background:var(--gold-bg);border:2px solid var(--gold-line);text-align:center}
 .entry-content .turn-block p{margin:0;text-align:center}
 .entry-content .turn-from{font-size:16px;font-weight:700;color:var(--ink-sub);text-decoration:line-through;text-decoration-color:var(--con-line)}
-.entry-content .turn-arrow{font-size:20px;line-height:1.4;color:var(--gold-line);margin:6px 0}
+.entry-content .turn-arrow{font-size:20px;line-height:1.4;color:var(--arrow);margin:6px 0}
 .entry-content .turn-to{font-size:23px;font-weight:800;line-height:1.5;color:var(--gold)}
 
 /* ---------- ① サービス登場：白背景のまま、ページ唯一の赤で目立たせる ----------
@@ -184,7 +184,7 @@ ol.merit-list li::before{content:counter(m);position:absolute;left:0;top:22px;wi
 /* ---------- D. 特典 ---------- */
 .bonus{border:2px solid var(--accent);background:#fffdf6;padding:16px 16px 14px;margin:0 0 10px;text-align:center}
 .entry-content .bonus p{margin:0;text-align:center}
-.entry-content .bonus-ttl{font-size:15px;font-weight:800;color:var(--accent);margin-bottom:2px}
+.entry-content .bonus-ttl{font-size:15px;font-weight:800;color:var(--accent-txt);margin-bottom:2px}
 .entry-content p.big-num{line-height:1;color:var(--accent);margin:0}
 .big-num b{font-size:54px;font-weight:800;letter-spacing:-.03em}
 .big-num small{font-size:19px;font-weight:800;margin:0 2px}
@@ -250,7 +250,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .entry-content .ba-v{font-size:26px;font-weight:800;line-height:1.3;margin:0 0 8px}
 .ba-col--after .ba-v{color:var(--gold)}
 .entry-content .ba-txt{font-size:13px;line-height:1.8;margin:0}
-.entry-content .ba-arrow{text-align:center;font-size:17px;color:var(--gold-line);margin:5px 0;line-height:1}
+.entry-content .ba-arrow{text-align:center;font-size:17px;color:var(--arrow);margin:5px 0;line-height:1}
 
 .case-row{display:grid;gap:10px;margin:0 0 16px}
 .case-mini{display:grid;grid-template-columns:96px minmax(0,1fr);gap:0;border:1px solid var(--rule);background:var(--paper);overflow:hidden}
@@ -281,7 +281,6 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .entry-content p.bridge::after{content:'\2193';display:block;margin-top:2px;font-size:20px;font-weight:400;line-height:1.4;color:var(--gold-line)}
 
 /* ---------- 山場の境界 ---------- */
-.entry-content .story-turn h2,.entry-content .story-close h2{color:var(--paper)}
 
 /* ---------- フッター ---------- */
 .footer{font:12px/1.8 var(--gothic);padding:24px var(--pad);background:var(--bg);color:var(--ink-sub)}
