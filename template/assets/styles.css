@@ -245,7 +245,8 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .voice{border-left:4px solid var(--gold-line);background:var(--gold-bg);padding:16px 16px 12px;margin:0 0 14px}
 .voice--lead{border-left-width:6px;padding:20px 18px 14px}
 .entry-content .voice-tag{display:inline-block;margin:0 0 9px;padding:3px 11px;background:var(--gold);color:#fff;font-size:12px;font-weight:800;line-height:1.6}
-.entry-content .voice-ttl{margin:0 0 12px;font-size:19px;font-weight:800;line-height:1.55;color:var(--gold)}
+.entry-content .voice-ttl{margin:0 0 12px;font-size:19px;font-weight:800;line-height:1.55;color:var(--gold);text-wrap:balance}
+.voice-ttl br{display:none}
 .voice--lead .voice-ttl{font-size:22px}
 .entry-content .voice p{font-size:14.5px;line-height:1.85;margin:0 0 12px}
 .voice-shot{margin:0 0 14px;max-width:215px}
