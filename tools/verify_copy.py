@@ -3,14 +3,13 @@
 import io, os, re, sys, unicodedata
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
-from lp_data import LPS
+from lp_data import LPS, FIXED_MARK as FIX
 
 strip = lambda s: re.sub(r'<[^>]+>', '', s)
 def norm(s):
     return re.sub(r'\s+', '', unicodedata.normalize('NFKC', s))
 
 master = io.open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
-FIX = '  <h3 class="sub-head">いま選べるのは、この4種類。</h3>'
 master_tail = master[master.index(FIX):]
 
 ng = []

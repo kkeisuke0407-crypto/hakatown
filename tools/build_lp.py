@@ -13,10 +13,9 @@ import io, os, re, sys, hashlib
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
-from lp_data import LPS
+from lp_data import LPS, FIXED_MARK
 
 MASTER = os.path.join(ROOT, 'index.html')
-FIXED_MARK = '  <h3 class="sub-head">お墓は、大きくこの4つ。</h3>'
 VAR_START  = '<section id="fv" class="kin-fv kin-fv--visual">'
 
 src = io.open(MASTER, encoding='utf-8').read()

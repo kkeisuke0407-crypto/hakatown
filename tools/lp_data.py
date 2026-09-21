@@ -12,6 +12,10 @@ txt : FVカードの本文（ティザー残り）
 body: 最初のH2の本文。('p', html) / ('list', [(見出し, 内容), ...]) / ('note', html)
 """
 
+# H3以降は全LP共通。生成と検査の両方がここを共通部の起点にする。
+# 見出しの文言を変えたら、ここだけ直せば両方に効く。
+FIXED_MARK = '  <h3 class="sub-head">お墓は、大きくこの4つ。</h3>'
+
 MARK = '<strong class="fv-card__mark">%s</strong>'
 
 LPS = [
