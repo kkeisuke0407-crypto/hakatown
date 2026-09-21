@@ -4,7 +4,7 @@
 共通部の実体はマスター1か所だけ。このスクリプトは index.html を読み、
 ・<head> のうち title / description / 相対パスだけを差し替え
 ・FV と 最初のH2（#points の先頭）だけを各LPのコピーに置換
-・H3「お墓は、大きくこの4つ。」以降は1文字も触らずそのまま流用
+・FIXED_MARKで指定した共通部の先頭以降は1文字も触らずそのまま流用
 して <slug>/index.html を書き出す。index.html 自体は絶対に書き換えない。
 
 使い方: python3 tools/build_lp.py
