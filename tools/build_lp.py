@@ -4,7 +4,7 @@
 共通部の実体はマスター1か所だけ。このスクリプトは index.html を読み、
 ・<head> のうち title / description / 相対パスだけを差し替え
 ・FV と 最初のH2（#points の先頭）だけを各LPのコピーに置換
-・H3「いま選べるのは、この4種類。」以降は1文字も触らずそのまま流用
+・H3「お墓は、大きくこの4つ。」以降は1文字も触らずそのまま流用
 して <slug>/index.html を書き出す。index.html 自体は絶対に書き換えない。
 
 使い方: python3 tools/build_lp.py
@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.join(ROOT, 'tools'))
 from lp_data import LPS
 
 MASTER = os.path.join(ROOT, 'index.html')
-FIXED_MARK = '  <h3 class="sub-head">いま選べるのは、この4種類。</h3>'
+FIXED_MARK = '  <h3 class="sub-head">お墓は、大きくこの4つ。</h3>'
 VAR_START  = '<section id="fv" class="kin-fv kin-fv--visual">'
 
 src = io.open(MASTER, encoding='utf-8').read()
