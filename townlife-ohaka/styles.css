@@ -85,8 +85,8 @@ h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
 .fv-card__btn span{font-size:15px}
 .fv-card__btn:hover{background:var(--cta-bottom)}
 .ohaka-hero__copy>p:not(.ohaka-hero__note){font:700 14px/1.6 var(--gothic);color:var(--gold);margin:0 0 18px}
-.ohaka-hero__copy h1{font:800 39px/1.6 var(--gothic);margin:0;color:var(--ink)}
-.ohaka-hero__copy h1 span{display:block}
+.ohaka-hero__copy h1{font:800 39px/1.6 var(--gothic);margin:0;color:var(--ink);text-wrap:balance}
+.ohaka-hero__copy h1 span{display:inline}
 /* 横展開LP：H1やティザーが長いKWでは、FVの高さを保つために一段小さくする */
 .ohaka-hero--h1-m .ohaka-hero__copy h1{font-size:34px}
 .fv-card__ttl--m{font-size:17px}

@@ -90,8 +90,8 @@ python3 tools/verify_copy.py                     # 照合   → NG 0
 node tools/qa_lp.mjs '["slug-a","slug-b"]'       # 表示   → 問題なし
 ```
 
-**共通部を直すときは `index.html` だけを編集して再生成する。**
-横展開LPを直接編集しない（次の生成で消える）。
+**共通部は `index.html`、各LP固有部は `tools/lp_data.py` を編集して再生成する。**
+生成済みの横展開LPを直接編集しない（次の生成で消える）。
 
 公開前は `docs/LP-CHECKLIST.md` を上から通す。
 
