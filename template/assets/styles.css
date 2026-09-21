@@ -1,0 +1,363 @@
+/* v7
+   方針：LP全体を1本の記事として自然に読ませる。
+   - 通常本文をしっかり使い、強調は要所だけ（1画面に「大声」は1回まで）
+   - 白背景が基本。背景色を敷くのは転換・結論・特典・比較だけ
+   - 3sha の DNA：情報密度、見出しと本文のメリハリ、写真/数字/カード/口コミの混在、
+     記事中に自然に置くCTA、無駄にスクロールを増やさない */
+@import url('./3sha-base.css');
+
+:root{--paper:#fff;--bg:#f4f5f4;--ink:#222;--sumi:#222;--sumi-2:#3a3a3a;--ink-sub:#666;--gold:#176b65;--gold-line:#8fbcae;--gold-bg:#f2f8f5;--rule:#dce1df;--rule-2:#e9edeb;--win:#176b65;--marker:#fff3ad;--cta:#167063;--cta-bottom:#0c4e46;--con:#a8563f;--con-bg:#fbf6f4;--con-line:#e0c7bd;--accent:#b9822b;--hot:#c9372c;--hot-bg:#ffd8d2;--mk:#cbe6da;--note:#767676;--arrow:#3a7a69;--accent-txt:#946416;--pad:clamp(20px,5vw,40px);--sans:var(--gothic)}
+
+html,body{margin:0;overflow-x:clip}
+body{font-family:var(--gothic);font-size:17px;line-height:1.9;letter-spacing:0;color:var(--ink)}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,h4{min-width:0;overflow-wrap:anywhere}
+.wrap{max-width:720px}
+.entry-content{padding:0 var(--pad)}
+
+/* ---------- セクション ---------- */
+/* 章の切れ目は大見出しの色帯が担当する。セクション側は余白だけ持たせる */
+.entry-content .sec{display:flow-root;padding:36px 0 34px}
+.entry-content .sec--sub{padding:30px 0 28px}
+.entry-content .sec--peak{padding:42px 0 40px}
+
+/* ---------- 本文：ここが主役 ---------- */
+.entry-content p{font-family:var(--gothic);font-size:17px;line-height:1.9;text-align:left;max-width:none;margin:0 0 18px}
+.entry-content strong{background:none;padding:0;font-weight:800;color:inherit}
+/* マーカーは1セクションに1回まで、という運用前提で控えめに */
+.entry-content strong.em-green{color:var(--gold);background:linear-gradient(transparent 64%,var(--marker) 64%);font-weight:800}
+.uline{text-decoration:none;background:linear-gradient(transparent 92%,var(--gold-line) 92%)}
+
+/* ---------- 見出し：2段階＋補足 ---------- */
+/* 章頭：帯をやめ、サービス名と同じ「マーカー＋下線」に揃える。
+   下線は記事幅いっぱいに引くので、章の区切り線も兼ねる。
+   赤はサービス名だけに残し、章の見出しは緑で通す */
+.sec-head{margin:0 0 22px}
+.entry-content p.sec-eyebrow{margin:0 0 6px;font-size:12.5px;font-weight:800;line-height:1.5;letter-spacing:.09em;color:var(--gold);text-align:left}
+.entry-content .sec--sub p.sec-eyebrow{color:var(--ink-sub)}
+.entry-content .sec-head h2{position:relative;display:block;border-left:0;margin:0;padding:0 0 13px;color:var(--ink)}
+.entry-content .sec-head h2>span{background:linear-gradient(transparent 58%,var(--mk) 58%);padding:0 4px;margin-left:-4px}
+/* h2::after を一律 display:none にしているので、ここだけ戻す */
+.entry-content .sec-head h2::after{content:'';display:block;position:absolute;left:0;bottom:0;
+  width:100%;height:4px;background:var(--gold)}
+/* 山場は線を太く濃く、補足の章は細くしてマーカーも外す */
+.entry-content .sec--peak .sec-head h2::after{height:5px;background:var(--cta-bottom)}
+.entry-content .sec--sub .sec-head h2{padding-bottom:10px}
+.entry-content .sec--sub .sec-head h2>span{background:none;padding:0;margin:0}
+.entry-content .sec--sub .sec-head h2::after{height:2px;background:var(--gold-line)}
+/* 大見出し：本文まわりの太字（19〜23px）より明確に上に立たせる */
+.entry-content h2{font-family:var(--gothic);font-size:clamp(25px,7.2vw,30px);font-weight:800;line-height:1.45;letter-spacing:-.01em;text-wrap:balance;text-align:left;color:var(--ink);background:none;border:0;border-left:5px solid var(--gold);border-radius:0;margin:0 0 18px;padding:1px 0 1px 13px}
+.entry-content .sec--peak h2{font-size:clamp(24px,7.8vw,33px);border-left-width:6px;margin-bottom:20px}
+.entry-content .sec--sub h2{font-size:clamp(21px,5.6vw,24px);border-left-width:4px;color:var(--gold)}
+.entry-content h2::after{display:none}
+/* 中見出し：大見出しとは別の記号（緑の小さな四角）にして、格の違いを形で示す */
+.entry-content h3.sub-head{position:relative;font-family:var(--gothic);font-size:19px;font-weight:800;line-height:1.6;text-wrap:balance;text-align:left;color:var(--ink);background:none;border:0;margin:40px 0 14px;padding:0 0 0 20px}
+.entry-content h3.sub-head::before{content:'';position:absolute;left:0;top:.62em;width:11px;height:11px;background:var(--gold)}
+.entry-content h3{font-family:var(--gothic);font-size:19px;font-weight:800;line-height:1.6;background:none;color:var(--ink);border:0;padding:0;margin:8px 0 12px;text-align:left}
+.entry-content h4{font-family:var(--gothic);font-weight:800;margin:0}
+.service-head small{display:block;font-size:16px;font-weight:400;margin-bottom:2px;color:var(--ink-sub)}
+
+/* ---------- 「大声」は各セクション1回まで ---------- */
+.entry-content .story-key{font-size:19px;line-height:1.75;font-weight:800;margin:24px 0 18px;text-align:left}
+.story-key strong{color:var(--gold)}
+
+/* ---------- FV ---------- */
+.kin-fv.kin-fv--visual{padding:0;overflow:clip}
+.ohaka-hero{position:relative;height:522px;margin:0;overflow:visible}
+.ohaka-hero>img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.ohaka-hero__copy{position:absolute;inset:0;padding:34px 32px;text-align:left;
+  background:linear-gradient(to bottom,rgba(255,255,255,.96) 0%,rgba(255,255,255,.9) 38%,rgba(255,255,255,0) 72%),
+             linear-gradient(100deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.55) 52%,rgba(255,255,255,0) 88%);
+  background-blend-mode:normal}
+
+/* FV下部のティザー。画像に文字は焼き込まず、HTMLテキストの白カードを写真に重ねる */
+.ohaka-hero__teaser{display:none}
+.fv-card{position:absolute;z-index:2;left:12px;right:12px;bottom:-1px;padding:18px 18px 16px;
+  background:rgba(255,255,255,.96);border-radius:14px 14px 0 0;box-shadow:0 -6px 22px rgba(20,50,45,.16);text-align:center}
+.fv-card__ttl{margin:0 0 8px;font-size:19px;font-weight:800;line-height:1.5;color:var(--gold);text-align:center;text-wrap:balance}
+.fv-card__txt{margin:0 0 13px;font-size:14px;font-weight:500;line-height:1.85;color:var(--sumi-2);text-align:center;text-wrap:balance}
+/* FVの肝：ここだけは「下線＋マーカー」で確実に目を止める */
+.fv-card__mark{font-weight:800;color:var(--gold);
+  background:linear-gradient(transparent 60%,var(--marker) 60%);
+  border-bottom:2px solid var(--gold);padding-bottom:1px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.fv-card__btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 14px;
+  background:var(--cta);border-radius:999px;color:#fff;font-size:14.5px;font-weight:700;line-height:1.4;text-decoration:none}
+.fv-card__btn span{font-size:15px}
+.fv-card__btn:hover{background:var(--cta-bottom)}
+.ohaka-hero__copy>p:not(.ohaka-hero__note){font:700 14px/1.6 var(--gothic);color:var(--gold);margin:0 0 18px}
+.ohaka-hero__copy h1{font:800 39px/1.6 var(--gothic);margin:0;color:var(--ink)}
+.ohaka-hero__copy h1 span{display:block}
+/* 横展開LP：H1やティザーが長いKWでは、FVの高さを保つために一段小さくする */
+.ohaka-hero--h1-m .ohaka-hero__copy h1{font-size:34px}
+.fv-card__ttl--m{font-size:17px}
+.fv-card__ttl--s{font-size:15.5px;line-height:1.55}
+/* ティザーが長いKWは、H1とカードが重ならないようFVを少しだけ高くする */
+.ohaka-hero.ohaka-hero--tall{height:560px}
+.ohaka-intro{padding-top:20px;padding-bottom:4px}
+.ohaka-intro .kin-banner-label{font-size:11px;font-weight:400;color:var(--ink-sub);margin:0 0 6px;text-align:left}
+/* ヒーロー右上の注記。コピー領域の最上段に右寄せで置く。
+   右端は白のグラデーションが薄いので、白の下地を敷いて読めるようにする */
+.ohaka-hero__note{margin:0 0 8px;text-align:right}
+.ohaka-hero__note span{display:inline-block;padding:3px 7px;background:rgba(255,255,255,.8);border-radius:5px;
+  font-size:10px;font-weight:500;line-height:1.6;letter-spacing:-.01em;color:var(--sumi-2)}
+.ohaka-tags{display:flex;flex-wrap:wrap;gap:6px;padding:0;list-style:none;margin:0 0 18px}
+.ohaka-tags li{padding:5px 10px;background:var(--gold-bg);border:1px solid var(--gold-line);font-size:12px;font-weight:700;line-height:1.6;color:var(--gold)}
+
+/* ---------- A. 4つのポイント ---------- */
+.ui-reco.ohaka-answer{padding:0;margin:0 0 20px;background:none;border:0;border-radius:0}
+.ohaka-answer ol{padding:0;margin:0;list-style:none;display:grid;gap:0}
+.ohaka-answer li{padding:16px 2px 16px 44px;margin:0;min-height:0;border:0;border-bottom:1px solid var(--rule);background:none;text-align:left}
+.ohaka-answer li:first-child{border-top:1px solid var(--rule)}
+.ohaka-answer li::before{top:18px;left:8px;width:24px;height:24px;line-height:24px;font-size:13px;background:var(--gold);color:var(--paper)}
+.ohaka-answer li>b{display:block;font-size:18px;font-weight:800;line-height:1.6;margin-bottom:2px}
+.ohaka-answer li>span{display:block;font-size:15px;line-height:1.85;color:var(--sumi-2)}
+
+/* ---------- A. お墓の種類の説明 ---------- */
+.type-list{margin:0 0 18px}
+.type-list dt{display:inline-block;margin:0 0 7px;padding:3px 11px;background:var(--gold);color:var(--paper);font-size:14px;font-weight:800;line-height:1.6}
+.type-list dd{margin:0 0 15px;padding:0 0 15px;font-size:15px;line-height:1.85;border-bottom:1px solid var(--rule)}
+.type-list dd:last-child{border-bottom:0;margin-bottom:0}
+
+/* ---------- B. 検索のループ ---------- */
+ol.loop-list{list-style:none;counter-reset:l;padding:14px 16px;margin:0 0 18px;background:var(--bg);display:grid;gap:2px}
+ol.loop-list li{counter-increment:l;position:relative;padding:5px 0 5px 30px;font-size:15px;line-height:1.7;color:var(--sumi-2)}
+ol.loop-list li::before{content:counter(l);position:absolute;left:0;top:8px;width:18px;height:18px;line-height:18px;text-align:center;font-size:10px;font-weight:800;color:var(--ink-sub);background:var(--paper);border:1px solid var(--rule);border-radius:50%}
+ol.loop-list li:last-child::after{content:'↻';position:absolute;right:2px;top:4px;font-size:16px;color:var(--gold-line)}
+
+/* ---------- 注記：本文の流れを止めないよう、小さく淡く。
+   ただし読めなくなると意味がないので、コントラスト比4.5:1は確保している ---------- */
+.entry-content p.kin-note{font-size:11.5px;line-height:1.7;text-align:left;color:var(--note);margin:0 0 16px;max-width:none;overflow-wrap:anywhere}
+.entry-content p.kin-note strong{font-weight:700;color:var(--note)}
+.kin-note a{color:var(--note);text-underline-offset:3px}
+.kin-photo figcaption,.official-top figcaption{color:var(--note)}
+
+/* ---------- 画像 ---------- */
+/* 図版は横幅いっぱい。entry-content の左右パディングを打ち消して、
+   スマホでは画面ぴったり、PCでは記事幅ぴったりにする */
+.kin-photo.ohaka-visual{max-width:none;margin:4px calc(var(--pad) * -1) 14px}
+.kin-photo.ohaka-visual img{width:100%;border:0;display:block}
+.kin-photo.ohaka-visual figcaption{padding:0 var(--pad)}
+.kin-photo figcaption,.official-top figcaption{font-size:11px;line-height:1.7;text-align:left;color:var(--ink-sub);margin-top:6px}
+.official-top{margin:4px auto 20px;max-width:290px}
+.official-top img{width:100%;border:1px solid var(--rule-2)}
+
+/* ---------- ① サービス登場：白背景のまま、ページ唯一の赤で目立たせる ----------
+   サービス名なので必ず1行に収める。帯は使わず、赤のマーカーと赤い下線だけで立たせる */
+/* 文字を大きく取りたいので、この一画面だけ左右パディングを打ち消して広く使う */
+.service-hero{text-align:center;margin:0 calc(var(--pad) * -1) 24px;padding:0 13px}
+.entry-content p.ribbon-head{margin:0 0 10px;text-align:center;font-size:15px;font-weight:800;color:var(--gold);line-height:1.5}
+.ribbon-head span{position:relative;display:inline-block;padding:0 20px}
+.ribbon-head span::before,.ribbon-head span::after{content:'';position:absolute;top:2px;width:2px;height:20px;background:var(--gold)}
+.ribbon-head span::before{left:4px;transform:rotate(-22deg)}
+.ribbon-head span::after{right:4px;transform:rotate(22deg)}
+.entry-content h2.service-head{position:relative;display:inline-block;text-align:center;color:var(--ink);
+  border-left:0;margin:0;padding:0 0 12px;font-size:clamp(23px,7.3vw,36px);line-height:1.35;letter-spacing:-.02em}
+/* 赤マーカー。本文の黄マーカーと同じ仕掛けで、熱量だけ上げている */
+.service-head>span{background:linear-gradient(transparent 56%,var(--hot-bg) 56%);padding:0 3px}
+/* 名前の下の赤い線。h2::after を一律 display:none にしているので、ここだけ戻す */
+.entry-content h2.service-head::after{content:'';display:block;position:absolute;left:50%;bottom:0;
+  width:100%;height:4px;background:var(--hot);transform:translateX(-50%)}
+.official-top.ohaka-visual{max-width:none}
+
+/* 視界に入ったら、ラベル→見出し→下線の順に出す。章頭とサービス名で共通。
+   隠すのは js-reveal が付いたときだけなので、JS不発でも内容は必ず見える */
+.js-reveal [data-reveal]>*{opacity:0;transform:translateY(14px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,.8,.3,1)}
+.js-reveal [data-reveal]>*+*{transition-delay:.1s}
+.js-reveal [data-reveal] h2::after{width:0;transition:width .5s cubic-bezier(.22,.8,.3,1) .34s}
+.js-reveal [data-reveal='in']>*{opacity:1;transform:none}
+.js-reveal [data-reveal='in'] h2::after{width:100%}
+
+/* ---------- ② サービス紹介：ここだけ熱量を上げる ----------
+   長い説明を積まず、短い言い切りを数か所だけ大きくして流し読みでも刺さるようにする */
+.entry-content p.service-punch{font-size:21px;font-weight:800;line-height:1.6;color:var(--gold);margin:26px 0 12px}
+.entry-content p.service-punch--sub{font-size:19px}
+
+/* 便利さの要点。カードを4枚積まず、1つの面に4行だけ並べる */
+.check-list{list-style:none;margin:24px 0 8px;padding:16px 16px 15px;display:grid;gap:11px;
+  background:var(--gold-bg);border:1px solid var(--gold-line);border-radius:10px}
+.entry-content .check-list li{position:relative;margin:0;padding:0 0 0 29px;
+  font-size:15.5px;font-weight:700;line-height:1.65;color:var(--sumi-2);text-wrap:pretty}
+.entry-content .check-list li::before{content:'✓';position:absolute;left:0;top:-1px;
+  width:21px;height:21px;line-height:21px;text-align:center;font-size:13px;font-weight:800;
+  color:var(--paper);background:var(--gold);border-radius:5px}
+/* 後半を inline-block にして、折り返すときは必ず「。」で切れるようにする */
+.entry-content .check-list li strong{display:inline-block;color:var(--gold);font-weight:800}
+
+/* ---------- ③ 信頼：公式グラフィックを主役に ---------- */
+.trust-fig{margin:4px auto 16px;max-width:330px}
+.trust-fig img{width:100%}
+.trust-fig--anniv{max-width:250px;margin-top:18px}
+.trust-list{list-style:none;padding:16px 16px 14px;margin:20px 0 12px;display:grid;gap:9px;background:var(--gold-bg);border:1px solid var(--gold-line)}
+.trust-list li{position:relative;padding:0 0 0 25px;font-size:14.5px;line-height:1.75;color:var(--sumi-2)}
+.trust-list li::before{content:'✓';position:absolute;left:2px;top:0;color:var(--gold);font-weight:800}
+
+/* ---------- D. 特典 ---------- */
+.bonus{border:2px solid var(--accent);background:#fffdf6;padding:16px 16px 14px;margin:0 0 10px;text-align:center}
+.entry-content .bonus p{margin:0;text-align:center}
+.entry-content .bonus-ttl{font-size:15px;font-weight:800;color:var(--accent-txt);margin-bottom:2px}
+.entry-content p.big-num{line-height:1;color:var(--accent);margin:0}
+.big-num b{font-size:54px;font-weight:800;letter-spacing:-.03em}
+.big-num small{font-size:19px;font-weight:800;margin:0 2px}
+.entry-content .bonus-sub{font-size:17px;font-weight:800;margin-top:5px}
+
+/* ---------- CTA：記事中に自然に置く。説明は詰めない ---------- */
+.simple-cta.kin-cta-block{margin:26px 0 14px;padding:0;border:0;background:none}
+.simple-cta .kin-phone{max-width:440px;min-height:72px;display:flex;align-items:center;justify-content:center;gap:16px;padding:16px 15px;margin:0 auto;background:var(--cta);border:0;border-bottom:4px solid var(--cta-bottom);border-radius:6px;color:var(--paper)!important;font-size:22px;font-weight:800;line-height:1.5;text-align:center;text-decoration:none;position:relative;overflow:hidden}
+.simple-cta .kin-phone:hover{background:var(--cta-bottom)}
+.simple-cta .kin-phone::after{display:none}
+/* CTAに光沢を一定間隔で走らせる。動かすのは transform だけなので描画負荷は軽い。
+   0.9秒かけて通り過ぎ、そのあと約2.7秒休む。ボタンの文字より前には出さない */
+.simple-cta .kin-phone::before{content:'';position:absolute;top:-60%;left:0;width:42%;height:220%;
+  background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.34) 50%,rgba(255,255,255,0) 100%);
+  transform:translateX(-220%) skewX(-22deg);pointer-events:none;
+  animation:cta-shine 3.6s ease-in-out infinite}
+@keyframes cta-shine{
+  0%{transform:translateX(-220%) skewX(-22deg)}
+  25%,100%{transform:translateX(340%) skewX(-22deg)}}
+.cta-arrow{font-size:30px;font-weight:400;line-height:1}
+.entry-content .simple-cta .cta-destination{font-size:12px;font-weight:400;line-height:1.7;margin:9px auto 0;color:var(--ink-sub);text-align:center}
+.simple-cta .cta-destination span{color:var(--ink-sub)}
+.cta:active{transform:translateY(1px)}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+
+/* ---------- E. 操作画面。幅を統一し、スクショを主役に ---------- */
+.ohaka-step{padding:6px 0 20px;margin:0 0 20px;border-bottom:1px solid var(--rule)}
+.ohaka-step:last-of-type{border-bottom:0}
+.entry-content .ohaka-step h3{font-size:19px;font-weight:800;text-align:left;margin:6px 0 12px}
+.ohaka-step h3 small{display:block;font-size:11px;font-weight:800;line-height:1.7;color:var(--gold);letter-spacing:.1em;margin-bottom:3px}
+.kin-photo.ohaka-screen{width:270px;max-width:100%;margin:0 auto 14px}
+.kin-photo.ohaka-screen img{width:270px;max-width:100%;height:auto;border:1px solid var(--rule);background:var(--paper)}
+.kin-photo.ohaka-screen--crop img{height:210px;object-fit:cover;object-position:top}
+.ohaka-extra{margin:8px 0 0}
+.ohaka-extra summary{font-size:13px;color:var(--gold);cursor:pointer;min-height:44px;padding:10px 0;text-align:left}
+.step-list{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:5px}
+.step-list li{display:grid;grid-template-columns:3.4em minmax(0,1fr);gap:10px;padding:9px 12px;border:1px solid var(--rule);background:var(--paper);font-size:14px;line-height:1.6}
+.step-list li>b{font-weight:800;color:var(--gold)}
+
+/* ---------- F. 比較（山場）：比較そのものは画像が担当。HTMLでは繰り返さない ---------- */
+.ui-conclusion{background:var(--gold-bg);border:2px solid var(--gold-line);border-radius:0;margin:22px 0;padding:22px 16px;text-align:center}
+.ui-conclusion__lbl{display:none}
+.entry-content .ui-conclusion p.ui-conclusion__main{font-size:23px;font-weight:800;line-height:1.75;margin:0;color:var(--ink);text-align:center}
+.ui-conclusion__main strong{color:var(--gold)}
+
+/* ---------- ④ 利用者コメント：カードで揃えず、引用として見せる ---------- */
+.voice{border-left:4px solid var(--gold-line);background:var(--gold-bg);padding:16px 16px 12px;margin:0 0 14px}
+.voice--lead{border-left-width:6px;padding:20px 18px 14px}
+.entry-content .voice-tag{display:inline-block;margin:0 0 9px;padding:3px 11px;background:var(--gold);color:#fff;font-size:12px;font-weight:800;line-height:1.6}
+.entry-content .voice-ttl{margin:0 0 12px;font-size:19px;font-weight:800;line-height:1.55;color:var(--gold)}
+.voice--lead .voice-ttl{font-size:22px}
+.entry-content .voice p{font-size:14.5px;line-height:1.85;margin:0 0 12px}
+.voice-shot{margin:0 0 14px;max-width:215px}
+.voice-shot img{width:100%;border:1px solid var(--rule-2);background:#fff}
+.entry-content p.voice-who{margin:0;padding-top:9px;border-top:1px dashed var(--gold-line);font-size:12.5px;font-weight:700;color:var(--ink-sub)}
+.voice-row{display:grid;gap:14px;margin:0 0 4px}
+
+/* ---------- G. 事例：1件目は大きく、2・3件目は横並びで形を変える ---------- */
+.case-full{border:1px solid var(--rule);background:var(--paper);padding:0 0 16px;margin:0 0 14px}
+.entry-content .case-index{margin:0;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--gold)}
+.entry-content .case-full p.case-index{padding:8px 14px 0}
+.entry-content h4.case-ttl{font-size:19px;font-weight:800;line-height:1.55;margin:0;padding:6px 14px 12px;text-align:left}
+.case-ttl strong{font-size:25px;color:var(--gold)}
+.case-photo{width:calc(100% - 28px);margin:0 14px 14px;height:130px;object-fit:cover}
+.ba{padding:0 14px}
+.ba-col{padding:13px}
+.ba-col--before{background:var(--bg)}
+.ba-col--after{background:var(--gold-bg);border:1px solid var(--gold-line)}
+.entry-content .ba-lbl{font-size:12px;font-weight:800;margin:0 0 6px;color:var(--ink-sub)}
+.ba-col--after .ba-lbl{color:var(--gold)}
+.entry-content .ba-k{font-size:11px;color:var(--ink-sub);margin:0}
+.entry-content .ba-v{font-size:26px;font-weight:800;line-height:1.3;margin:0 0 8px}
+.ba-col--after .ba-v{color:var(--gold)}
+.entry-content .ba-txt{font-size:13px;line-height:1.8;margin:0}
+.entry-content .ba-arrow{text-align:center;font-size:17px;color:var(--arrow);margin:5px 0;line-height:1}
+
+.case-row{display:grid;gap:10px;margin:0 0 16px}
+.case-mini{display:grid;grid-template-columns:96px minmax(0,1fr);gap:0;border:1px solid var(--rule);background:var(--paper);overflow:hidden}
+.case-mini>img{width:96px;height:100%;min-height:120px;object-fit:cover}
+.case-mini__body{padding:12px 13px}
+.entry-content .case-mini__ttl{font-size:15px;font-weight:800;line-height:1.55;margin:3px 0 8px}
+.case-mini__ttl strong{color:var(--gold)}
+.entry-content .case-mini__ba{display:flex;align-items:baseline;gap:7px;margin:0 0 8px;font-weight:800}
+.case-mini__ba span{font-size:14px;color:var(--ink-sub);text-decoration:line-through}
+.case-mini__ba i{font-style:normal;color:var(--gold-line)}
+.case-mini__ba b{font-size:19px;color:var(--gold)}
+.entry-content .case-mini__txt{font-size:13px;line-height:1.75;margin:0;color:var(--sumi-2)}
+
+/* ---------- H. FAQ ---------- */
+.kin-faq{margin:0}
+.kin-faq details{border-bottom:1px solid var(--rule);padding:0}
+.kin-faq details:first-child{border-top:1px solid var(--rule)}
+.kin-faq summary.kin-faq__q{position:relative;display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none;font-size:16px;font-weight:700;line-height:1.65;text-align:left;min-height:60px;margin:0;padding:15px 0 15px 26px;border:0}
+.kin-faq summary::-webkit-details-marker{display:none}
+.kin-faq summary.kin-faq__q::before{top:15px;color:var(--gold)}
+.kin-faq summary>span{margin-left:auto;flex:none;font-size:20px;color:var(--gold)}
+.kin-faq details[open] summary>span{font-size:0}
+.kin-faq details[open] summary>span::after{content:'−';font-size:20px}
+.entry-content .kin-faq p.kin-faq__a{font-size:15px;line-height:1.85;text-align:left;margin:0;padding:0 0 17px 26px}
+
+/* ---------- 章と章のつなぎ。本文と同じ見た目にせず、「渡し」だと分かる形にする ---------- */
+.entry-content p.bridge{margin:30px 0 0;text-align:center;font-size:16px;font-weight:700;line-height:1.8;color:var(--ink-sub)}
+.entry-content p.bridge::after{content:'\2193';display:block;margin-top:2px;font-size:20px;font-weight:400;line-height:1.4;color:var(--gold-line)}
+
+/* ---------- 山場の境界 ---------- */
+
+/* ---------- 運営者情報ページ ---------- */
+.about-list{margin:0 0 30px;padding:0;border-top:1px solid var(--rule)}
+.about-list dt{margin:0;padding:13px 0 0;font-size:13px;font-weight:800;color:var(--gold)}
+.about-list dd{margin:0;padding:2px 0 13px;font-size:16px;line-height:1.7;border-bottom:1px solid var(--rule)}
+
+/* ---------- フッター ---------- */
+.footer{font:12px/1.8 var(--gothic);padding:24px var(--pad);background:var(--bg);color:var(--ink-sub)}
+.footer p{margin:0 0 12px}
+.footer>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 16px}
+.footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--gold)}
+.skip{position:fixed;left:12px;top:12px;clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+.skip:focus{z-index:10;clip-path:none;width:auto;height:auto;padding:12px;background:var(--paper)}
+
+/* ---------- レスポンシブ ---------- */
+@media(min-width:601px){
+  .entry-content p{font-size:18px}
+  .entry-content h3.sub-head{font-size:21px}
+  .ba{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);align-items:stretch}
+  .entry-content .ba-arrow{display:flex;align-items:center;justify-content:center;transform:rotate(-90deg);margin:0}
+  .case-photo{height:190px}
+  .case-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .case-mini{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .case-mini>img{width:100%;height:130px;min-height:0}
+  .voice,.voice-row,.trust-list,.case-full,.check-list{max-width:560px;margin-inline:auto}
+  .big-num b{font-size:64px}
+}
+@media(max-width:600px){
+  .ohaka-hero{height:512px}
+  .ohaka-hero.ohaka-hero--tall{height:562px}
+  /* スマホは縦長に切り抜かれ元絵の半分強しか映らない。60%だと右にいる夫が
+     フレームから切れるため、夫婦2人が収まる85%に寄せる（PCは切り抜き不要なので据え置き） */
+  .ohaka-hero>img{object-position:85% center}
+  .ohaka-hero__copy{padding:25px 20px;background:linear-gradient(90deg,#fffffff0,transparent 96%)}
+  .ohaka-hero__copy>p:not(.ohaka-hero__note){font-size:12px;margin-bottom:9px}
+  .ohaka-hero__copy h1{font-size:29px;line-height:1.7}
+  .ohaka-hero--h1-m .ohaka-hero__copy h1{font-size:25px;line-height:1.62}
+  .simple-cta .kin-phone{font-size:20px;gap:14px}
+  .entry-content .ui-conclusion p.ui-conclusion__main{font-size:21px}
+  .entry-content .story-key{font-size:18.5px}
+}
+@media(max-width:359px){
+  .ohaka-hero{height:516px}
+  .ohaka-hero.ohaka-hero--tall{height:560px}
+  /* 通常幅では余白が空きすぎるが、320px級だけ詰まるページ用 */
+  .ohaka-hero.ohaka-hero--tall-xs{height:545px}
+  .ohaka-hero__copy h1{font-size:26px}
+  .ohaka-hero--h1-m .ohaka-hero__copy h1{font-size:23px}
+  .entry-content p.sec-eyebrow{font-size:12px;letter-spacing:.06em}
+  .big-num b{font-size:44px}
+  .simple-cta .kin-phone{font-size:18px;gap:10px;padding-inline:10px;min-height:66px}
+  .entry-content h4.case-ttl{font-size:17px}
+  .case-ttl strong{font-size:20px}
+  .entry-content .ba-v{font-size:22px}
+  .case-mini{grid-template-columns:76px minmax(0,1fr)}
+  .case-mini>img{width:76px}
+  .entry-content .story-key{font-size:18px}
+  .kin-photo.ohaka-screen,.kin-photo.ohaka-screen img{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
