@@ -67,12 +67,16 @@ for (const slug of ['', ...slugs]) {
     if (r.hidden > 0) add(name, w, `非表示のまま残る見出し ${r.hidden}件`);
     if (!r.revealAlive) add(name, w, 'スクロールイン演出のCSSが効いていない');
     if (!r.serviceMark) add(name, w, 'サービス名の赤マーカーが消えている');
-    if (r.serviceRule !== 'rgb(201, 55, 44)') add(name, w, `サービス名の赤下線が消えている (${r.serviceRule})`);
-    if (r.ribbon !== 'rgb(23, 107, 101)') add(name, w, `リボンの装飾が消えている (${r.ribbon})`);
+    // ★案件ごとに差し替える：--hot と --gold の実値
+    const HOT = 'rgb(201, 55, 44)', GOLD = 'rgb(23, 107, 101)';
+    if (r.serviceRule !== HOT) add(name, w, `サービス名の下線色が想定外 (${r.serviceRule})`);
+    if (r.ribbon !== GOLD) add(name, w, `リボンの装飾が消えている (${r.ribbon})`);
     const realBroken = r.brokenImg.filter(u => !/02-prefecture\.png/.test(u)); // details内の遅延画像は未展開で正常
     if (realBroken.length) add(name, w, `画像切れ: ${realBroken.join(', ')}`);
-    if (r.ctas.some(h => h !== 'https://townlife-ohaka.jp/')) add(name, w, `CTAリンク異常: ${r.ctas}`);
-    if (r.ctas.length !== 5) add(name, w, `CTA数が${r.ctas.length}（想定5）`);
+    // ★案件ごとに差し替える：CTAの正しい遷移先と本数
+    const CTA_URL = 'https://example.com/', CTA_COUNT = 5;
+    if (r.ctas.some(h => h !== CTA_URL)) add(name, w, `CTAリンク異常: ${r.ctas}`);
+    if (r.ctas.length !== CTA_COUNT) add(name, w, `CTA数が${r.ctas.length}（想定${CTA_COUNT}）`);
     const realMiss = missing.filter(u => !/googletagmanager|ERR_TUNNEL/.test(u)); // 検証環境は外部通信遮断
     if (realMiss.length) add(name, w, `リクエスト失敗/エラー: ${realMiss.slice(0,3).join(' | ')}`);
     if (w === 390) console.log(`${name.padEnd(22)} 画像${r.imgCount} CTA${r.ctas.length} FV余白${String(r.fvGap).padStart(4)}px 高さ${r.heroH} | ${r.h1}`);
