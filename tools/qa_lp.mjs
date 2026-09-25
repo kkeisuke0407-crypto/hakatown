@@ -28,19 +28,20 @@ for (const slug of ['', ...slugs]) {
     await p.evaluate(() => Promise.race([
       Promise.all([...document.images].filter(i => i.getAttribute('src') && !i.closest('details:not([open])')).map(i => i.decode().catch(() => {}))),
       new Promise(r => setTimeout(r, 5000))]));
-    // 操作画面（スクロールで STEP が進む部品）：固定されるか、途中までスクロールすると STEP3 になるか
+    // 操作画面（自動で STEP が進み、タップで次へ飛ばせる部品）：固定されないこと、自動で進むこと、ボタンで次へ進むこと
     const sc = await p.evaluate(async () => {
       const root = document.querySelector('[data-scrub]');
       if (!root) return { exists: false };
       const pin = root.querySelector('.scrub__pin');
-      const res = { exists: true, on: root.classList.contains('scrub--on'), sticky: getComputedStyle(pin).position,
+      const res = { exists: true, on: root.classList.contains('scrub--on'), pos: getComputedStyle(pin).position,
         imgs: root.querySelectorAll('img').length, broken: [...root.querySelectorAll('img')].filter(i => !i.naturalWidth).length };
-      const top = root.getBoundingClientRect().top + scrollY, dist = root.offsetHeight - pin.offsetHeight;
-      window.scrollTo(0, top + dist * 0.5);
-      await new Promise(r => setTimeout(r, 150));
-      const op = [...root.querySelectorAll('.scrub__steps>li')].map(li => +getComputedStyle(li).opacity);
-      res.mid = op.indexOf(Math.max(...op)) + 1;
-      res.pinTop = Math.round(pin.getBoundingClientRect().top);
+      const bar = () => { const m = getComputedStyle(root.querySelector('.scrub__seg>div')).transform.match(/matrix\(([^,]+)/); return m ? +m[1] : 0; };
+      const step = () => { const op = [...root.querySelectorAll('.scrub__steps>li')].map(li => +getComputedStyle(li).opacity); return op.indexOf(Math.max(...op)) + 1; };
+      root.scrollIntoView({ block: 'center' });
+      await new Promise(r => setTimeout(r, 300)); const b0 = bar();
+      await new Promise(r => setTimeout(r, 700)); res.autoplay = bar() > b0;
+      root.querySelector('.scrub__next').click();
+      await new Promise(r => setTimeout(r, 450)); res.afterTap = step();
       window.scrollTo(0, 0);
       await new Promise(r => setTimeout(r, 150));
       return res;
@@ -96,9 +97,11 @@ for (const slug of ['', ...slugs]) {
     if (r.ctas.length !== 5) add(name, w, `CTA数が${r.ctas.length}（想定5）`);
     if (!sc.exists) add(name, w, '操作画面（data-scrub）がない');
     else {
-      if (!sc.on || sc.sticky !== 'sticky') add(name, w, `操作画面の動きが効いていない (on=${sc.on}, position=${sc.sticky})`);
+      if (!sc.on) add(name, w, '操作画面の動きが効いていない（scrub.js が読めていない）');
+      if (sc.pos === 'sticky' || sc.pos === 'fixed') add(name, w, `操作画面がページのスクロールを止めている (position=${sc.pos})`);
       if (sc.imgs !== 5 || sc.broken) add(name, w, `操作画面の画像 ${sc.imgs}枚 / 読めない ${sc.broken}枚`);
-      if (sc.mid !== 3 || Math.abs(sc.pinTop) > 1) add(name, w, `操作画面が進まない/固定されない (中間でSTEP${sc.mid}, top=${sc.pinTop})`);
+      if (!sc.autoplay) add(name, w, '操作画面が自動で進まない');
+      if (sc.afterTap !== 2) add(name, w, `「次のSTEPへ」でSTEP2に進まない (STEP${sc.afterTap})`);
     }
     const realMiss = missing.filter(u => !/googletagmanager|ERR_TUNNEL/.test(u)); // 検証環境は外部通信遮断
     if (realMiss.length) add(name, w, `リクエスト失敗/エラー: ${realMiss.slice(0,3).join(' | ')}`);

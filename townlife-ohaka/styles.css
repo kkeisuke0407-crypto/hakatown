@@ -361,8 +361,8 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
   .entry-content .story-key{font-size:18px}
   .kin-photo.ohaka-screen,.kin-photo.ohaka-screen img{width:100%}
 }
-/* 操作画面：スクロールに合わせて STEP 1〜5 が進む（#steps。動きは scrub.js）
-   JSが動かないときは STEP の文章がそのまま縦に並ぶ */
+/* 操作画面：画面に入ると STEP 1〜5 が自動で進み、タップで次へ飛ばせる（#steps。動きは scrub.js）
+   ページのスクロールは止めない。JSが動かないときは STEP の文章がそのまま縦に並ぶ */
 .scrub{position:relative;margin:4px 0 8px}
 .scrub__steps{list-style:none;margin:0;padding:0}
 .scrub__steps>li{margin:0 0 22px;padding:0}
@@ -371,13 +371,12 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .entry-content .scrub__txt{margin:0;font-size:15px;line-height:1.75;text-wrap:balance}
 .scrub__txt .ph{display:inline-block}
 .scrub__stage{display:none}
-.scrub--on{height:calc(100vh + var(--scrub-dist));height:calc(100svh + var(--scrub-dist))}
-.scrub--on .scrub__pin{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:16px 0}
+.scrub--on .scrub__pin{display:flex;flex-direction:column;gap:12px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 .scrub__bar{display:flex;gap:6px}
 .scrub__seg{flex:1;height:4px;border-radius:2px;background:var(--rule);overflow:hidden}
 .scrub__seg>div{height:100%;background:var(--gold);transform-origin:left center;transform:scaleX(0)}
 .scrub--on .scrub__steps{position:relative;min-height:var(--scrub-cap)}
-.scrub--on .scrub__steps>li{position:absolute;left:0;right:0;top:0;margin:0;text-align:center}
+.scrub--on .scrub__steps>li{position:absolute;left:0;right:0;bottom:0;margin:0;text-align:center}
 .scrub--on .entry-content .scrub__ttl,.scrub--on .scrub__ttl,.scrub--on .scrub__txt{text-align:center}
 .scrub--on .scrub__stage{display:block;position:relative;flex:none;margin:0 auto;overflow:hidden;border-radius:18px}
 .scrub__card{position:absolute;left:0;top:0;width:560px;height:700px;transform-origin:0 0;background:var(--gold-bg);overflow:hidden}
@@ -395,4 +394,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .scrub__caret{width:3px;background:var(--gold)}
 .scrub__check svg{display:block}
 .scrub+.kin-note{margin-top:4px}
+.scrub__next{align-self:center;display:inline-flex;align-items:center;gap:6px;margin:2px 0 0;padding:9px 20px;border:1px solid var(--gold-line);border-radius:999px;background:var(--paper);color:var(--gold);font:700 14px/1.4 var(--gothic);cursor:pointer}
+.scrub__next span{font-size:18px;line-height:1}
+.scrub__next:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
