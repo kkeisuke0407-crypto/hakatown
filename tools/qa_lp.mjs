@@ -24,6 +24,27 @@ for (const slug of ['', ...slugs]) {
       window.scrollTo(0, 0);
     });
     await p.waitForTimeout(700);
+    // 近づいてから読み込む画像（操作画面など）が読み終わるのを待つ
+    await p.evaluate(() => Promise.race([
+      Promise.all([...document.images].filter(i => i.getAttribute('src') && !i.closest('details:not([open])')).map(i => i.decode().catch(() => {}))),
+      new Promise(r => setTimeout(r, 5000))]));
+    // 操作画面（スクロールで STEP が進む部品）：固定されるか、途中までスクロールすると STEP3 になるか
+    const sc = await p.evaluate(async () => {
+      const root = document.querySelector('[data-scrub]');
+      if (!root) return { exists: false };
+      const pin = root.querySelector('.scrub__pin');
+      const res = { exists: true, on: root.classList.contains('scrub--on'), sticky: getComputedStyle(pin).position,
+        imgs: root.querySelectorAll('img').length, broken: [...root.querySelectorAll('img')].filter(i => !i.naturalWidth).length };
+      const top = root.getBoundingClientRect().top + scrollY, dist = root.offsetHeight - pin.offsetHeight;
+      window.scrollTo(0, top + dist * 0.5);
+      await new Promise(r => setTimeout(r, 150));
+      const op = [...root.querySelectorAll('.scrub__steps>li')].map(li => +getComputedStyle(li).opacity);
+      res.mid = op.indexOf(Math.max(...op)) + 1;
+      res.pinTop = Math.round(pin.getBoundingClientRect().top);
+      window.scrollTo(0, 0);
+      await new Promise(r => setTimeout(r, 150));
+      return res;
+    });
     const r = await p.evaluate(() => {
       const out = {};
       out.hScroll = document.documentElement.scrollWidth - document.documentElement.clientWidth;
@@ -73,6 +94,12 @@ for (const slug of ['', ...slugs]) {
     if (realBroken.length) add(name, w, `画像切れ: ${realBroken.join(', ')}`);
     if (r.ctas.some(h => h !== 'https://townlife-ohaka.jp/')) add(name, w, `CTAリンク異常: ${r.ctas}`);
     if (r.ctas.length !== 5) add(name, w, `CTA数が${r.ctas.length}（想定5）`);
+    if (!sc.exists) add(name, w, '操作画面（data-scrub）がない');
+    else {
+      if (!sc.on || sc.sticky !== 'sticky') add(name, w, `操作画面の動きが効いていない (on=${sc.on}, position=${sc.sticky})`);
+      if (sc.imgs !== 5 || sc.broken) add(name, w, `操作画面の画像 ${sc.imgs}枚 / 読めない ${sc.broken}枚`);
+      if (sc.mid !== 3 || Math.abs(sc.pinTop) > 1) add(name, w, `操作画面が進まない/固定されない (中間でSTEP${sc.mid}, top=${sc.pinTop})`);
+    }
     const realMiss = missing.filter(u => !/googletagmanager|ERR_TUNNEL/.test(u)); // 検証環境は外部通信遮断
     if (realMiss.length) add(name, w, `リクエスト失敗/エラー: ${realMiss.slice(0,3).join(' | ')}`);
     if (w === 390) console.log(`${name.padEnd(22)} 画像${r.imgCount} CTA${r.ctas.length} FV余白${String(r.fvGap).padStart(4)}px 高さ${r.heroH} | ${r.h1}`);
