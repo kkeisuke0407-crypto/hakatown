@@ -70,7 +70,7 @@ def build_variable(lp):
 
     return '''<section id="fv" class="kin-fv kin-fv--visual">
   <figure class="kin-fv__visual ohaka-hero{hero_cls}">
-    <img src="../townlife-ohaka/images/hero-family.png" alt="明るい自宅でタブレットを見ながら相談する夫婦のイメージ" width="1536" height="1024" fetchpriority="high">
+    <img src="../townlife-ohaka/images/hero-family.webp" alt="明るい自宅でタブレットを見ながら相談する夫婦のイメージ" width="1536" height="1024" fetchpriority="high">
     <div class="ohaka-hero__copy">
     <p class="ohaka-hero__note"><span>※本記事中の画像はイメージです。<br>※本記事の金額・内容は一例です。</span></p>
       <p>家族で考える、これからのお墓</p>
