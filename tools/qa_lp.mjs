@@ -51,9 +51,12 @@ for (const slug of ['', ...slugs]) {
       out.hScroll = document.documentElement.scrollWidth - document.documentElement.clientWidth;
       const vw = document.documentElement.clientWidth;
       // 画面外にはみ出している要素
+      // data-clip-window を付けた「切り取り窓」（操作画面のスマホ枠）の中で隠れている部分は、はみ出しに数えない。
+      // それ以外（FV・本文）は、枠で切れていても文字や画像が切れているのと同じなので数える
+      const clipped = el => !!el.closest('[data-clip-window]');
       out.overflow = [...document.querySelectorAll('main *')].filter(el => {
         const r = el.getBoundingClientRect();
-        return r.width > 0 && (r.right > vw + 1.5 || r.left < -1.5);
+        return r.width > 0 && (r.right > vw + 1.5 || r.left < -1.5) && !clipped(el);
       }).map(el => el.tagName.toLowerCase() + '.' + String(el.className || '').split(' ')[0]).slice(0, 5);
       // FV：H1ブロックとティザーカードの重なり
       const copy = document.querySelector('.ohaka-hero__copy h1');

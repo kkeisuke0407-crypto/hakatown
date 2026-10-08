@@ -76,6 +76,7 @@
     card = make('scrub__card', stage);
     make('scrub__phone', card);
     var screen = make('scrub__screen', card);
+    screen.setAttribute('data-clip-window', '');   // 画面送り中の画像は枠の外に出るが見えない（検査用の印）
     var shots = make('scrub__shots', screen), fx = make('scrub__fx', screen);
     Object.keys(SHOTS).forEach(function (k) { shotEls[k] = make('scrub__shot', shots); });
     FX.forEach(function (f) {
