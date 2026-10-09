@@ -415,20 +415,6 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .entry-content .cost-points img{display:block;width:104px;height:70px;object-fit:cover;border-radius:6px}
 .entry-content .cost-points b{display:inline-block;margin:0 0 4px;padding:2px 10px;background:var(--gold);color:var(--paper);font-size:13px;font-weight:800;line-height:1.6}
 .entry-content .cost-points span{display:block;font-size:14.5px;line-height:1.75}
-/* 運営会社の数字：画像ではなく文字で */
-.entry-content .trust-stat{max-width:330px;margin:6px auto 16px;padding:12px 14px;border:1px solid var(--rule);background:var(--gold-bg);text-align:center}
-.entry-content .trust-stat--sub{max-width:260px;margin-top:18px}
-.trust-stat__lbl{display:block;font-size:13px;font-weight:700;line-height:1.5;color:var(--ink-sub)}
-.trust-stat__num{display:block;font-size:34px;font-weight:800;line-height:1.25;letter-spacing:.01em;color:var(--gold)}
-.trust-stat--sub .trust-stat__num{font-size:28px}
-.trust-stat__num small{margin-left:3px;font-size:16px;color:var(--ink)}
-/* 事例の見出し画像：公式の写真ではなく自前のアイコン */
-.case-visual{display:flex;align-items:center;justify-content:center;margin:0 14px 14px;height:96px;background:var(--gold-bg);color:var(--gold)}
-.case-visual svg{width:60px;height:60px}
-.case-mini__visual{display:flex;align-items:center;justify-content:center;min-height:120px;background:var(--gold-bg);color:var(--gold)}
-.case-mini__visual svg{width:44px;height:44px}
-@media(min-width:601px){
-  .case-visual{height:120px}
-  .case-mini__visual{min-height:96px}
-}
+/* 事例の写真（フリー素材）：横長の枠では道が見える位置で切り取る */
+.case-mini>img.case-mini__img--low{object-position:50% 82%}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
